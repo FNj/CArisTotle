@@ -1,0 +1,1 @@
+from .CArisTotle import app
