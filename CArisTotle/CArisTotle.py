@@ -1,11 +1,12 @@
-from flask import Flask, current_app
+from flask import Flask
+from flask import url_for
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello_world():
-    return current_app.send_static_file('stat.html')
-
+    return url_for('static', filename='stat.html')
 
 if __name__ == '__main__':
     app.run()
