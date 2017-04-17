@@ -1,0 +1,1243 @@
+net
+{
+    node_size = (80 40);
+    HR_realname_Q1 = "Q1";
+    HR_realname_Q2 = "Q2";
+    HR_realname_Q3 = "Q3";
+    HR_realname_Q4 = "Q4";
+    HR_realname_Q5 = "Q5";
+    HR_realname_Q6 = "Q6";
+    HR_realname_Q7 = "Q7";
+    HR_realname_Q8 = "Q8";
+    HR_realname_Q9 = "Q9";
+    HR_realname_Q10 = "Q10";
+    HR_realname_Q11 = "Q11";
+    HR_realname_Q12 = "Q12";
+    HR_realname_Q13 = "Q13";
+    HR_realname_Q14 = "Q14";
+    HR_realname_Q15 = "Q15";
+    HR_realname_Q19 = "Q19";
+    HR_realname_Q20 = "Q20";
+    HR_realname_Q21 = "Q21";
+    HR_realname_Q22 = "Q22";
+    HR_realname_Q23 = "Q23";
+    HR_realname_Q24 = "Q24";
+    HR_realname_Q25 = "Q25";
+    HR_realname_Q26 = "Q26";
+    HR_realname_Q27 = "Q27";
+    HR_realname_Q28 = "Q28";
+    HR_realname_Q29 = "Q29";
+    HR_realname_Q30 = "Q30";
+    HR_realname_Q32 = "Q32";
+    HR_realname_Q33 = "Q33";
+    HR_realname_Q34 = "Q34";
+    HR_realname_Q35 = "Q35";
+    HR_realname_Q36 = "Q36";
+    HR_realname_Q37 = "Q37";
+    HR_realname_Q38 = "Q38";
+    HR_realname_Q39 = "Q39";
+    HR_realname_Q40 = "Q40";
+    HR_realname_Q41 = "Q41";
+    HR_realname_Q42 = "Q42";
+    HR_realname_Q43 = "Q43";
+    HR_realname_Q44 = "Q44";
+    HR_realname_Q45 = "Q45";
+    HR_realname_Q46 = "Q46";
+    HR_realname_Q47 = "Q47";
+    HR_realname_Q48 = "Q48";
+    HR_realname_Q49 = "Q49";
+    HR_realname_Q50 = "Q50";
+    HR_realname_Q51 = "Q51";
+    HR_realname_Q56 = "Q56";
+    HR_realname_Q59 = "Q59";
+    HR_realname_Q60 = "Q60";
+    HR_realname_Q61 = "Q61";
+    HR_realname_Q62 = "Q62";
+    HR_realname_Q63 = "Q63";
+    HR_realname_S1 = "S1";
+    HR_realname_physics_exam = "physics_exam";
+    HR_realname_math_exam = "math_exam";
+    HR_realname_chemistry_exam = "chemistry_exam";
+    HR_realname_math = "math";
+    HR_realname_age = "age";
+    HR_realname_class = "class";
+    HR_realname_school = "school";
+    HR_realname_gender = "gender";
+    HR_realname_name_filled = "name_filled";
+    HR_realname_chemistry = "chemistry";
+    HR_realname_physics = "physics";
+    HR_DBN_Num_Slices = "5";
+    HR_OOBN_CheckConsistency = "1";
+    HR_Color_DiscreteFunction = "5";
+    HR_Color_Function = "4";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Compile_SaveToMemory = "0";
+    HR_Desc = "";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "Arial";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+}
+
+node S1
+{
+    label = "";
+    position = (1256 258);
+    states = ("State 1" "State 2" "State 3");
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_2 = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+    HR_LinkGroup = "[math_1:0][math_2:0]";
+    HR_LinkMode = "[Q1:0][Q2:0][Q3:0][Q4:0][Q5:0][Q6:0][Q7:0][Q8:0][Q9:0][Q10:0][Q11:0][Q12:0][Q13:0][Q14:0][Q15:0][Q16:0][Q17:0][Q18:0][Q19:0][Q20:0][Q21:0][Q22:0][Q23:0][Q24:0][Q25:0][Q26:0][Q27:0][Q28:0][Q29:0][Q30:0][Q31:0][Q32:0][Q33:0][Q34:0][Q35:0][Q36:0][Q37:0][Q38:0][Q39:0][Q40:0][Q41:0][Q42:0][Q43:0][Q44:0][Q45:0][Q46:0][Q47:0][Q48:0][Q49:0][Q50:0][Q51:0][Q52:0][Q53:0][Q54:0][Q55:0][Q56:0][Q57:0][Q58:0][Q59:0][Q60:0][Q61:0][Q62:0][Q63:0][age:0][class:0][gender:0][school:0][name_filled:0][chemistry:0][chemistry_exam:0][physics:0][physics_exam:0][math:0][math_exam:0][math_1:0][math_2:0]";
+}
+
+node Q63
+{
+    label = "";
+    position = (1010 670);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q62
+{
+    label = "";
+    position = (850 690);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q61
+{
+    label = "";
+    position = (690 670);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q60
+{
+    label = "";
+    position = (530 690);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q59
+{
+    label = "";
+    position = (370 670);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q56
+{
+    label = "";
+    position = (1050 590);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q51
+{
+    label = "";
+    position = (250 610);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q50
+{
+    label = "";
+    position = (90 590);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q49
+{
+    label = "";
+    position = (1010 510);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q48
+{
+    label = "";
+    position = (850 530);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q47
+{
+    label = "";
+    position = (690 510);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q46
+{
+    label = "";
+    position = (530 530);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q45
+{
+    label = "";
+    position = (370 510);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q44
+{
+    label = "";
+    position = (210 530);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q43
+{
+    label = "";
+    position = (50 510);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q42
+{
+    label = "";
+    position = (1050 430);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q41
+{
+    label = "";
+    position = (890 450);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q40
+{
+    label = "";
+    position = (730 430);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q39
+{
+    label = "";
+    position = (570 450);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q38
+{
+    label = "";
+    position = (410 430);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q37
+{
+    label = "";
+    position = (250 450);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q36
+{
+    label = "";
+    position = (90 430);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q35
+{
+    label = "";
+    position = (1010 350);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q34
+{
+    label = "";
+    position = (850 370);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q33
+{
+    label = "";
+    position = (690 350);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q32
+{
+    label = "";
+    position = (530 370);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q30
+{
+    label = "";
+    position = (210 370);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q29
+{
+    label = "";
+    position = (50 350);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q28
+{
+    label = "";
+    position = (1050 270);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q27
+{
+    label = "";
+    position = (890 290);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q26
+{
+    label = "";
+    position = (730 270);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q25
+{
+    label = "";
+    position = (570 290);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q24
+{
+    label = "";
+    position = (410 270);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q23
+{
+    label = "";
+    position = (250 290);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q22
+{
+    label = "";
+    position = (90 270);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q21
+{
+    label = "";
+    position = (1010 190);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q20
+{
+    label = "";
+    position = (850 210);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q19
+{
+    label = "";
+    position = (690 190);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q15
+{
+    label = "";
+    position = (50 190);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q14
+{
+    label = "";
+    position = (1050 110);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q13
+{
+    label = "";
+    position = (890 130);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q12
+{
+    label = "";
+    position = (730 110);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q11
+{
+    label = "";
+    position = (570 130);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q10
+{
+    label = "";
+    position = (410 110);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q9
+{
+    label = "";
+    position = (250 130);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q8
+{
+    label = "";
+    position = (90 110);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q7
+{
+    label = "";
+    position = (1010 30);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q6
+{
+    label = "";
+    position = (850 50);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q5
+{
+    label = "";
+    position = (690 30);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q4
+{
+    label = "";
+    position = (530 50);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q3
+{
+    label = "";
+    position = (370 30);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q2
+{
+    label = "";
+    position = (210 50);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+node Q1
+{
+    label = "";
+    position = (50 30);
+    states = ("0.0" "1.0");
+    subtype = number;
+    state_values = (0 1);
+}
+
+potential (S1)
+{
+    data = ( 0.395524 0.38691 0.217566 );
+    experience = 253;
+}
+
+potential (Q63 | S1)
+{
+    data
+     = (( 0.935227 0.0647732 )	%  S1=State 1
+	( 0.768966 0.231034 )	%  S1=State 2
+	( 0.665672 0.334328 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q62 | S1)
+{
+    data
+     = (( 0.92762 0.0723803 )	%  S1=State 1
+	( 0.76623 0.23377 )	%  S1=State 2
+	( 0.648033 0.351967 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q61 | S1)
+{
+    data
+     = (( 0.830223 0.169777 )	%  S1=State 1
+	( 0.642373 0.357627 )	%  S1=State 2
+	( 0.518507 0.481493 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q60 | S1)
+{
+    data
+     = (( 0.951011 0.0489889 )	%  S1=State 1
+	( 0.944225 0.0557747 )	%  S1=State 2
+	( 0.833986 0.166014 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q59 | S1)
+{
+    data
+     = (( 0.960997 0.0390029 )	%  S1=State 1
+	( 0.944248 0.0557521 )	%  S1=State 2
+	( 0.833959 0.166041 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q56 | S1)
+{
+    data
+     = (( 0.818512 0.181488 )	%  S1=State 1
+	( 0.673349 0.326651 )	%  S1=State 2
+	( 0.575546 0.424454 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q51 | S1)
+{
+    data
+     = (( 0.693347 0.306653 )	%  S1=State 1
+	( 0.403817 0.596183 )	%  S1=State 2
+	( 0.410388 0.589612 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q50 | S1)
+{
+    data
+     = (( 0.879221 0.120779 )	%  S1=State 1
+	( 0.846735 0.153265 )	%  S1=State 2
+	( 0.792692 0.207308 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q49 | S1)
+{
+    data
+     = (( 0.979959 0.0200411 )	%  S1=State 1
+	( 0.936229 0.0637713 )	%  S1=State 2
+	( 0.66841 0.33159 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q48 | S1)
+{
+    data
+     = (( 0.900203 0.099797 )	%  S1=State 1
+	( 0.793788 0.206212 )	%  S1=State 2
+	( 0.594366 0.405634 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q47 | S1)
+{
+    data
+     = (( 0.952341 0.0476589 )	%  S1=State 1
+	( 0.787234 0.212766 )	%  S1=State 2
+	( 0.474902 0.525098 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q46 | S1)
+{
+    data
+     = (( 0.954302 0.0456981 )	%  S1=State 1
+	( 0.838296 0.161704 )	%  S1=State 2
+	( 0.525868 0.474132 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q45 | S1)
+{
+    data
+     = (( 0.750804 0.249196 )	%  S1=State 1
+	( 0.678072 0.321928 )	%  S1=State 2
+	( 0.454063 0.545937 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q44 | S1)
+{
+    data
+     = (( 0.842317 0.157683 )	%  S1=State 1
+	( 0.460067 0.539933 )	%  S1=State 2
+	( 0.239374 0.760626 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q43 | S1)
+{
+    data
+     = (( 0.823035 0.176965 )	%  S1=State 1
+	( 0.427554 0.572446 )	%  S1=State 2
+	( 0.186911 0.813089 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q42 | S1)
+{
+    data
+     = (( 0.999334 0.000666453 )	%  S1=State 1
+	( 0.857666 0.142334 )	%  S1=State 2
+	( 0.355053 0.644947 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q41 | S1)
+{
+    data
+     = (( 0.999334 0.000666463 )	%  S1=State 1
+	( 0.763016 0.236984 )	%  S1=State 2
+	( 0.287202 0.712798 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q40 | S1)
+{
+    data
+     = (( 0.970361 0.0296387 )	%  S1=State 1
+	( 0.967153 0.032847 )	%  S1=State 2
+	( 0.449191 0.550809 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q39 | S1)
+{
+    data
+     = (( 0.980355 0.0196455 )	%  S1=State 1
+	( 0.96767 0.0323296 )	%  S1=State 2
+	( 0.375602 0.624398 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q38 | S1)
+{
+    data
+     = (( 0.949158 0.0508419 )	%  S1=State 1
+	( 0.703394 0.296606 )	%  S1=State 2
+	( 0.248274 0.751726 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q37 | S1)
+{
+    data
+     = (( 0.776542 0.223458 )	%  S1=State 1
+	( 0.58995 0.41005 )	%  S1=State 2
+	( 0.236975 0.763025 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q36 | S1)
+{
+    data
+     = (( 0.703667 0.296333 )	%  S1=State 1
+	( 0.520151 0.479849 )	%  S1=State 2
+	( 0.221079 0.778921 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q35 | S1)
+{
+    data
+     = (( 0.973342 0.0266578 )	%  S1=State 1
+	( 0.805526 0.194474 )	%  S1=State 2
+	( 0.404191 0.595809 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q34 | S1)
+{
+    data
+     = (( 0.846263 0.153737 )	%  S1=State 1
+	( 0.448093 0.551907 )	%  S1=State 2
+	( 0.126324 0.873676 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q33 | S1)
+{
+    data
+     = (( 0.759594 0.240406 )	%  S1=State 1
+	( 0.156576 0.843424 )	%  S1=State 2
+	( 0.021116 0.978884 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q32 | S1)
+{
+    data
+     = (( 0.785431 0.214569 )	%  S1=State 1
+	( 0.223476 0.776524 )	%  S1=State 2
+	( 0.0368452 0.963155 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q30 | S1)
+{
+    data
+     = (( 0.827309 0.172691 )	%  S1=State 1
+	( 0.509014 0.490986 )	%  S1=State 2
+	( 0.143279 0.856721 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q29 | S1)
+{
+    data
+     = (( 0.787009 0.212991 )	%  S1=State 1
+	( 0.635516 0.364484 )	%  S1=State 2
+	( 0.354922 0.645078 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q28 | S1)
+{
+    data
+     = (( 0.800088 0.199912 )	%  S1=State 1
+	( 0.401853 0.598147 )	%  S1=State 2
+	( 0.074493 0.925507 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q27 | S1)
+{
+    data
+     = (( 0.818595 0.181405 )	%  S1=State 1
+	( 0.341707 0.658293 )	%  S1=State 2
+	( 0.0751404 0.92486 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q26 | S1)
+{
+    data
+     = (( 0.902974 0.0970265 )	%  S1=State 1
+	( 0.543922 0.456078 )	%  S1=State 2
+	( 0.143486 0.856514 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q25 | S1)
+{
+    data
+     = (( 0.558095 0.441905 )	%  S1=State 1
+	( 0.24271 0.75729 )	%  S1=State 2
+	( 0.0525801 0.94742 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q24 | S1)
+{
+    data
+     = (( 0.950856 0.0491442 )	%  S1=State 1
+	( 0.952672 0.0473285 )	%  S1=State 2
+	( 0.365066 0.634934 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q23 | S1)
+{
+    data
+     = (( 0.950682 0.0493183 )	%  S1=State 1
+	( 0.912309 0.0876913 )	%  S1=State 2
+	( 0.364494 0.635506 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q22 | S1)
+{
+    data
+     = (( 0.989341 0.0106593 )	%  S1=State 1
+	( 0.987861 0.0121394 )	%  S1=State 2
+	( 0.650371 0.349629 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q21 | S1)
+{
+    data
+     = (( 0.989341 0.0106593 )	%  S1=State 1
+	( 0.977645 0.0223554 )	%  S1=State 2
+	( 0.614036 0.385964 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q20 | S1)
+{
+    data
+     = (( 0.92044 0.0795596 )	%  S1=State 1
+	( 0.454747 0.545253 )	%  S1=State 2
+	( 0.233981 0.766019 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q19 | S1)
+{
+    data
+     = (( 0.939124 0.0608764 )	%  S1=State 1
+	( 0.425611 0.574389 )	%  S1=State 2
+	( 0.0883262 0.911674 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q15 | S1)
+{
+    data
+     = (( 0.744829 0.255171 )	%  S1=State 1
+	( 0.283359 0.716641 )	%  S1=State 2
+	( 0.0586661 0.941334 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q14 | S1)
+{
+    data
+     = (( 0.790437 0.209563 )	%  S1=State 1
+	( 0.439492 0.560508 )	%  S1=State 2
+	( 0.0977717 0.902228 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q13 | S1)
+{
+    data
+     = (( 0.83851 0.16149 )	%  S1=State 1
+	( 0.63832 0.36168 )	%  S1=State 2
+	( 0.129138 0.870862 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q12 | S1)
+{
+    data
+     = (( 0.741945 0.258055 )	%  S1=State 1
+	( 0.481592 0.518408 )	%  S1=State 2
+	( 0.0565559 0.943444 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q11 | S1)
+{
+    data
+     = (( 0.926571 0.0734295 )	%  S1=State 1
+	( 0.701556 0.298444 )	%  S1=State 2
+	( 0.165434 0.834566 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q10 | S1)
+{
+    data
+     = (( 0.919174 0.0808257 )	%  S1=State 1
+	( 0.648292 0.351708 )	%  S1=State 2
+	( 0.200934 0.799066 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q9 | S1)
+{
+    data
+     = (( 0.438959 0.561041 )	%  S1=State 1
+	( 0.353146 0.646854 )	%  S1=State 2
+	( 0.181774 0.818226 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q8 | S1)
+{
+    data
+     = (( 0.303613 0.696387 )	%  S1=State 1
+	( 0.205419 0.794581 )	%  S1=State 2
+	( 0.109186 0.890814 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q7 | S1)
+{
+    data
+     = (( 0.247007 0.752993 )	%  S1=State 1
+	( 0.0583934 0.941607 )	%  S1=State 2
+	( 0.073878 0.926122 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q6 | S1)
+{
+    data
+     = (( 0.0319244 0.968076 )	%  S1=State 1
+	( 0.0126545 0.987345 )	%  S1=State 2
+	( 0.00121115 0.998789 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q5 | S1)
+{
+    data
+     = (( 0.686593 0.313407 )	%  S1=State 1
+	( 0.395383 0.604617 )	%  S1=State 2
+	( 0.146989 0.853011 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q4 | S1)
+{
+    data
+     = (( 0.135089 0.864911 )	%  S1=State 1
+	( 0.0604289 0.939571 )	%  S1=State 2
+	( 0.00121115 0.998789 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q3 | S1)
+{
+    data
+     = (( 0.198313 0.801687 )	%  S1=State 1
+	( 0.0570884 0.942912 )	%  S1=State 2
+	( 0.0557185 0.944282 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q2 | S1)
+{
+    data
+     = (( 0.0716344 0.928366 )	%  S1=State 1
+	( 0.0231391 0.976861 )	%  S1=State 2
+	( 0.00121115 0.998789 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}
+
+potential (Q1 | S1)
+{
+    data
+     = (( 0.0969723 0.903028 )	%  S1=State 1
+	( 0.0380999 0.9619 )	%  S1=State 2
+	( 0.00121119 0.998789 ));	%  S1=State 3
+    experience
+     = ( 100.068	%  S1=State 1
+	 97.8883	%  S1=State 2
+	 55.0441 );	%  S1=State 3
+}

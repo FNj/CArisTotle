@@ -4,7 +4,7 @@ from rpy2.robjects.packages import importr
 
 base = importr('base')
 utils = importr('utils')
-catest = importr('catest')
+# catest = importr('catest')
 
 pi = robjects.r('pi')
 
@@ -22,4 +22,4 @@ o = robjects.r('''
 
 r_f = robjects.r['f']
 
-print(pi, o, r_f(3))
+print(pi, o, r_f(3, verbose=True)[0])
