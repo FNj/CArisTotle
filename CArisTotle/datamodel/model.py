@@ -50,6 +50,9 @@ class TestInstance(ForwardDeclarationBase): pass
 class Answer(ForwardDeclarationBase): pass
 
 
+class_list = [User, Test, Skill, SkillState, Question, QuestionState, PossibleAnswer, TestInstance, Answer]
+
+
 class User(ModelBase, AutoReprMixin):
     __tablename__ = 'users'
 
