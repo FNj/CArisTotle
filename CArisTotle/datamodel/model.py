@@ -4,8 +4,10 @@
 from typing import List
 
 from .config import db
+from ..common.mixins import AutoReprMixin
 
 ModelBase = db.Model
+
 Column = db.Column
 Integer = db.Integer
 String = db.String
@@ -62,7 +64,7 @@ class User(ModelBase):
             self.name, self.fullname, self.password, self.email)
 
 
-class Test(ModelBase):
+class Test(ModelBase, AutoReprMixin):
     __tablename__ = 'tests'
 
     id: int = Column(Integer, primary_key=True)
@@ -77,7 +79,7 @@ class Test(ModelBase):
     instances: List[TestInstance] = relationship("TestInstance", back_populates='test')
 
 
-class Skill(ModelBase):
+class Skill(ModelBase, AutoReprMixin):
     __tablename__ = 'skills'
 
     id: int = Column(Integer, primary_key=True)
@@ -89,7 +91,7 @@ class Skill(ModelBase):
     states: List[SkillState] = relationship("SkillState", back_populates="skill")
 
 
-class SkillState(ModelBase):
+class SkillState(ModelBase, AutoReprMixin):
     __tablename__ = 'skill_states'
 
     id: int = Column(Integer, primary_key=True)
@@ -101,7 +103,7 @@ class SkillState(ModelBase):
     test: Test = property(lambda self: self.skill.test)
 
 
-class Question(ModelBase):
+class Question(ModelBase, AutoReprMixin):
     __tablename__ = 'questions'
 
     id: int = Column(Integer, primary_key=True)
@@ -114,7 +116,7 @@ class Question(ModelBase):
     possible_answers: List[PossibleAnswer] = relationship("PossibleAnswer", secondary="question_states")
 
 
-class QuestionState(ModelBase):
+class QuestionState(ModelBase, AutoReprMixin):
     __tablename__ = 'question_states'
 
     id: int = Column(Integer, primary_key=True)
@@ -127,7 +129,7 @@ class QuestionState(ModelBase):
     possible_answers: List[PossibleAnswer] = relationship("PossibleAnswer", back_populates='state')
 
 
-class PossibleAnswer(ModelBase):
+class PossibleAnswer(ModelBase, AutoReprMixin):
     __tablename__ = 'possible_answers'
 
     id: int = Column(Integer, primary_key=True)
@@ -140,7 +142,7 @@ class PossibleAnswer(ModelBase):
     answers: List[Answer] = relationship("Answer", back_populates='possible_answer')
 
 
-class TestInstance(ModelBase):
+class TestInstance(ModelBase, AutoReprMixin):
     __tablename__ = 'test_instances'
 
     id: int = Column(Integer, primary_key=True)
@@ -152,7 +154,7 @@ class TestInstance(ModelBase):
     answers: List[Answer] = relationship("Answer", back_populates='test_instance')
 
 
-class Answer(ModelBase):
+class Answer(ModelBase, AutoReprMixin):
     __tablename__ = 'answers'
 
     id: int = Column(Integer, primary_key=True)

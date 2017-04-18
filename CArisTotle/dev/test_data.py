@@ -6,9 +6,10 @@ from ..inteRface.classes import BayesNet
 net_file_path = os.path.join(os.path.dirname(__file__), 'net_set1.net')
 
 with open(net_file_path, "r") as net_file:
-    net_def = net_file.readlines()
+    net_def = net_file.read()
 
 skill_names = ['S1']
+
 net_reader = BayesNet(net_def, skill_names)
 # question_names = net_reader.get_questions()
 # questions_number_of_states = net_reader.get_questions_numbers_of_states()
@@ -20,7 +21,7 @@ me = User(name='František Navrkal', fullname="František'); DROP TABLE users;--
           password='zizalajeborec123', email='frantisek.navrkal@pirati.cz')
 entities.append(me)
 
-my_test = Test(name="Testy test", default_criterion=1, net_definition="some_def", submitter=me)
+my_test = Test(name="Testy test", default_criterion=1, net_definition=net_def, submitter=me)
 entities.append(my_test)
 
 # my_skill = Skill(name='S1', test=my_test, text='test skill')

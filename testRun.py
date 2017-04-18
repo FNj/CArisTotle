@@ -24,12 +24,13 @@ session.commit()
 #
 # for ans in pa.question.possible_answers:
 #     print(ans.state.description, ": ", ans.text)
-
-# input("Press Enter to drop all tables.")
+pass
+print(Test.query.first())
+input("Press Enter to drop all tables.")
 drop_all()
 #
 with open(net_file_path, "r") as myfile:
-    net_def = myfile.readlines()
+    net_def = myfile.read()
 
 skill_vars_names = ['S1']
 net_reader = rifc.BayesNet(net_def, skill_vars_names)

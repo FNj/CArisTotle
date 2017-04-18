@@ -1,13 +1,13 @@
 from typing import List
 
-from .common import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question
+from .procedural import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question
 
 
 class BayesNet:
-    def __init__(self, net_string_line_list: List[str], skill_vars_names: List[str]):
-        self.net_string_by_lines = net_string_line_list
+    def __init__(self, net_string: str, skill_vars_names: List[str]):
+        self.net_string = net_string
         self.skill_vars_names = skill_vars_names
-        self.model = init_net(self.net_string_by_lines, self.skill_vars_names)
+        self.model = init_net(self.net_string, self.skill_vars_names)
         self.questions = self.get_questions()
         self.questions_numbers_of_states = self.get_questions_numbers_of_states()
         self.skills = self.get_skills()

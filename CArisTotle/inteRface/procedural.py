@@ -29,7 +29,8 @@ r_insert_evidence = ro.r['insert.evidence']
 r_pick_question = ro.r['pick.question']
 
 
-def init_net(net_string_line_list: List[str], skill_vars_names: List[str]):
+def init_net(net_string: str, skill_vars_names: List[str]):
+    net_string_line_list = ro.StrVector(net_string.split('\n'))
     r_skill_vars_names = ro.StrVector(skill_vars_names)
     return r_initialize_network(net_string_line_list, r_skill_vars_names, is_file=False)
 
