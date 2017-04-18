@@ -2,7 +2,7 @@ import time
 
 from CArisTotle.datamodel.model import *
 from CArisTotle.datamodel.procedures import session, init_db, drop_all
-from CArisTotle.dev.test_data import entities, net_file_path
+from CArisTotle.dev.test_data import net_file_path, entities
 from CArisTotle.inteRface import classes as rifc
 
 start_time = time.time()
@@ -28,7 +28,7 @@ pass
 print(Test.query.first())
 input("Press Enter to drop all tables.")
 drop_all()
-#
+
 with open(net_file_path, "r") as myfile:
     net_def = myfile.read()
 
@@ -38,12 +38,12 @@ questions = net_reader.get_questions()
 skills = net_reader.get_skills()
 questions_number_of_states = net_reader.get_questions_numbers_of_states()
 skills_number_of_states = net_reader.get_skills_numbers_of_states()
-net_reader.insert_evidence(questions[0:2], [0, 1])
-pick = net_reader.pick_question(['Q2', 'Q3', 'Q4', 'Q5', 'Q36'])  # TODO: test results
+# net_reader.insert_evidence(questions[0:2], [0, 1])
+pick = net_reader.pick_question(net_reader.get_questions())  # TODO: test results
 print(pick)
 
 print(net_file_path)
 
-print("--- %s seconds ---" % (time.time() - start_time))
-pass
+# print("--- %s seconds ---" % (time.time() - start_time))
+# pass
 # app.run()

@@ -50,7 +50,7 @@ class TestInstance(ForwardDeclarationBase): pass
 class Answer(ForwardDeclarationBase): pass
 
 
-class User(ModelBase):
+class User(ModelBase, AutoReprMixin):
     __tablename__ = 'users'
 
     id: int = Column(Integer, primary_key=True)
@@ -58,10 +58,6 @@ class User(ModelBase):
     fullname: str = Column(String)
     password: str = Column(String)
     email: str = Column(String)
-
-    def __repr__(self):
-        return "<User(name='%s', fullname='%s', password='%s', email='%s')>" % (
-            self.name, self.fullname, self.password, self.email)
 
 
 class Test(ModelBase, AutoReprMixin):
