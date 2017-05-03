@@ -1,11 +1,14 @@
 import time
-
-from CArisTotle.datamodel.model import *
-from CArisTotle.datamodel.procedures import session, init_db, drop_all
-from CArisTotle.dev.test_data import net_file_path, entities
-from CArisTotle.inteRface import classes as rifc
-
 start_time = time.time()
+from CArisTotle.datamodel.model import *
+from CArisTotle.datamodel.procedures import session, init_db, drop_all, \
+    get_entity_by_type_and_id, create_and_get_test_instance
+from CArisTotle.dev.test_data import entities
+from CArisTotle.common.classes import BayesNetDataModelWrapper
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+# --- insert test_data
 drop_all()
 init_db()
 
@@ -14,7 +17,52 @@ session.commit()
 
 q45: Question = session.query(Question).filter_by(name='Q45').first()
 q45.text = 'Q45 MODIFIED placeholder text'
+assert session.query(Question).filter_by(name='Q45').first().text == 'Q45 MODIFIED placeholder text'
 session.commit()
+print("--- %s seconds ---" % (time.time() - start_time))
+# --- take imaginary test based on test data
+test: Test = get_entity_by_type_and_id(Test, 1)
+student = get_entity_by_type_and_id(User, 1)
+
+test_instance = create_and_get_test_instance(test, student)
+
+bayes_net = BayesNetDataModelWrapper(test_instance)
+
+picked_questions = bayes_net.pick_questions()
+
+print([question.name for question in picked_questions])
+session.commit()
+print("--- %s seconds ---" % (time.time() - start_time))
+# --- new request
+test_instance_id = test_instance.id
+selected_answers_ids = [75]
+
+test_instance = get_entity_by_type_and_id(TestInstance, test_instance_id)
+bayes_net = BayesNetDataModelWrapper(test_instance)
+
+for selected_answer_id in selected_answers_ids:
+    bayes_net.post_answer(selected_answer_id)
+
+picked_questions = bayes_net.pick_questions()
+print([question.name for question in picked_questions])
+
+session.commit()
+print("--- %s seconds ---" % (time.time() - start_time))
+# --- new request
+test_instance_id = test_instance.id
+selected_answers_ids = [42]
+
+# test_instance = get_entity_by_type_and_id(TestInstance, test_instance_id)
+# bayes_net = BayesNetDataModelWrapper(test_instance)
+bayes_net = BayesNetDataModelWrapper.from_test_instance_id(test_instance_id)
+
+for selected_answer_id in selected_answers_ids:
+    bayes_net.post_answer(selected_answer_id)
+
+results = bayes_net.get_results()
+print(results)
+session.commit()
+
 
 # session.close()
 #
@@ -24,26 +72,26 @@ session.commit()
 #
 # for ans in pa.question.possible_answers:
 #     print(ans.state.description, ": ", ans.text)
-pass
-print(Test.query.first())
-input("Press Enter to drop all tables.")
-drop_all()
+# pass
+# print(Test.query.first())
+# input("Press Enter to drop all tables.")
+# drop_all()
+#
+# with open(net_file_path, "r") as myfile:
+#     net_def = myfile.read()
+#
+# skill_vars_names = ['S1']
+# net_reader = BayesNet(net_def, skill_vars_names)
+# questions = net_reader.get_questions()
+# skills = net_reader.get_skills()
+# questions_number_of_states = net_reader.get_questions_numbers_of_states()
+# skills_number_of_states = net_reader.get_skills_numbers_of_states()
+# # net_reader.insert_evidence(questions[0:2], [0, 1])
+# pick = net_reader.pick_question(net_reader.get_questions())  # TODO: test results
+# print(pick)
 
-with open(net_file_path, "r") as myfile:
-    net_def = myfile.read()
+# print(net_file_path)
 
-skill_vars_names = ['S1']
-net_reader = rifc.BayesNet(net_def, skill_vars_names)
-questions = net_reader.get_questions()
-skills = net_reader.get_skills()
-questions_number_of_states = net_reader.get_questions_numbers_of_states()
-skills_number_of_states = net_reader.get_skills_numbers_of_states()
-# net_reader.insert_evidence(questions[0:2], [0, 1])
-pick = net_reader.pick_question(net_reader.get_questions())  # TODO: test results
-print(pick)
-
-print(net_file_path)
-
-# print("--- %s seconds ---" % (time.time() - start_time))
+print("--- %s seconds ---" % (time.time() - start_time))
 # pass
 # app.run()

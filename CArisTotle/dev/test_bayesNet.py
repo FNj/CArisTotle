@@ -40,5 +40,5 @@ class TestBayesNet(TestCase):
         self.net_reader.insert_evidence(['Q42', 'Q24'], [0, 1])
 
     def test_pick_question(self):
-        pick = self.net_reader.pick_question(self.net_reader.get_questions())
+        pick = self.net_reader.pick_questions(self.net_reader.get_questions())
         self.assertEqual(pick, ['Q19'], 'Unexpected question picked.')

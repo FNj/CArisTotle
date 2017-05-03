@@ -28,6 +28,16 @@ r_insert_evidence = ro.r['insert.evidence']
 
 r_pick_question = ro.r['pick.question']
 
+ro.r('''get.marginals <- function(model, node_vector) {
+                model <- one.dimensional.marginals(model, node.index(model, node_vector))
+                x <- list()
+                for(i in 1:length(node_vector)){
+                    x[[i]] <- model@marginals[[i]]@a
+                }
+                x
+            }''')
+r_get_marginals = ro.r['get.marginals']
+
 
 def init_net(net_string: str, skill_vars_names: List[str]):
     net_string_line_list = ro.StrVector(net_string.split('\n'))
@@ -66,3 +76,9 @@ def pick_question(model, all_questions: List[str], candidate_questions: List[str
     question_indices = list(pick_obj[2])
     picked_questions = [candidate_questions[index - 1] for index in question_indices]
     return picked_questions
+
+
+def get_marginals(model, node_names_list: List[str]):
+    r_node_vector = ro.StrVector(node_names_list)
+    marginals = r_get_marginals(model, r_node_vector)
+    return [list(marginal) for marginal in marginals]

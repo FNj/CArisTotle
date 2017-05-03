@@ -1,6 +1,7 @@
 from typing import List
 
-from .procedural import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question
+from .procedural import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question, \
+    get_marginals
 
 
 class BayesNet:
@@ -25,8 +26,16 @@ class BayesNet:
     def get_skills_numbers_of_states(self):
         return get_numbers_of_states(self.model, self.skills)
 
-    def insert_evidence(self, questions_names, questions_states):
+    def insert_evidence(self, questions_names: List[str], questions_states: List[int]):
         self.model = insert_evidence(self.model, questions_names, questions_states)
 
-    def pick_question(self, candidate_questions, selection_criterion=1):
+    def pick_questions(self, candidate_questions=None, selection_criterion=1):
+        if candidate_questions is None:
+            candidate_questions = self.questions
         return pick_question(self.model, self.questions, candidate_questions, selection_criterion)
+
+    def get_marginals(self, node_names: List[str]):
+        return get_marginals(self.model, node_names)
+
+    def get_results(self):
+        return self.get_marginals(self.skills)

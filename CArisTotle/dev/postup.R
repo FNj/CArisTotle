@@ -94,5 +94,6 @@ q_to_ask <- question.list[[pick$question]]
 
 # získat výsledky
 
-model <- one.dimensional.marginals(model, node.index(model, skill.vars))
+model <- one.dimensional.marginals(model, node.index(model, c(skill.vars, "Q1")))
 model@marginals
+model@marginals[[1]]@a
