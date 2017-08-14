@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="{{ config.lang }}">
+{% block head %}
+<head>
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+
+    <title>{% block title %}CArisTotle: adaptivní testování{% endblock %}</title>
+
+    <meta name="description" content="CArisTotle: adaptivní testování">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="CArisTotle">
+
+    <!-- FONT
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+    <!-- Scripts
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+    <!-- Favicon
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon.ico"> -->
+
+</head>
+{% endblock %}
+{% block body %}
+<body>
+{% block header %}
+<header id="header">
+    <div class="container">
+        <!--<div class="row">-->
+        <!--<div class="twelve columns">-->
+        <!--<img src="assets/images/logo.svg" class="logo">-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="twelve columns">
+                <a class="no-underline default-color" href="{{ url_for('index') }}">
+                    <h1>CArisTotle</h1>
+                    <p>Adaptivní testování</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block nav %}
+<nav id="nav">
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <a class="button button-primary" href="{{ url_for('tests_list') }}">Testy</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+{% block main %}
+<main>
+</main>
+{% endblock %}
+{% block user_menu %}
+<nav id="user_menu">
+    <div class="container">
+        {% include "security/_menu.html" %}
+    </div>
+</nav>
+{% endblock %}
+{% block footer %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <p>
+                    <span class="u-mirror-horizontally">&copy;</span> František Navrkal, 2017. Všechna práva vyhlazena.
+                    Sdílejte a nechte ostatní sdílet za stejných podmínek.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+</body>
+{% endblock %}
+</html>

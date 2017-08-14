@@ -1,0 +1,35 @@
+{% extends "common.html" %}
+
+{% block main %}
+<main>
+    <section id="tests">
+        <div class="container">
+            <div class="header row">
+                <div class="twelve columns">
+                    <h2>Testy:</h2>
+                </div>
+            </div>
+            {% for test in tests %}
+            <article>
+                <div class="row">
+                    <div class="four columns header">
+                        <h3>{{ test.name }}</h3>
+                    </div>
+                    <div class="eight columns">
+                        <p>{{ test.description }}</p>
+                        <a class="button button-primary" href="{{ url_for('test_overview', test_id=test.id) }}">Otevřít
+                            přehled testu</a>
+                    </div>
+                </div>
+            </article>
+            {% else %}
+            <div class="row">
+                <div class="twelve columns header">
+                    <p>Žádné testy k dispozici.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

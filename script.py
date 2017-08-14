@@ -7,7 +7,6 @@ from CArisTotle.dev.test_data import entities
 from CArisTotle.common.classes import BayesNetDataModelWrapper
 
 print("--- %s seconds ---" % (time.time() - start_time))
-
 # --- insert test_data
 drop_all()
 init_db()
@@ -23,8 +22,11 @@ print("--- %s seconds ---" % (time.time() - start_time))
 # --- take imaginary test based on test data
 test: Test = get_entity_by_type_and_id(Test, 1)
 student = get_entity_by_type_and_id(User, 1)
+selection_criterion = get_entity_by_type_and_id(SelectionCriterion, 1)
+# for role in student.roles:
+#     print(role.name, role.description)
 
-test_instance = create_and_get_test_instance(test, student)
+test_instance = create_and_get_test_instance(test, student, selection_criterion)
 
 bayes_net = BayesNetDataModelWrapper(test_instance)
 
@@ -41,7 +43,7 @@ test_instance = get_entity_by_type_and_id(TestInstance, test_instance_id)
 bayes_net = BayesNetDataModelWrapper(test_instance)
 
 for selected_answer_id in selected_answers_ids:
-    bayes_net.post_answer(selected_answer_id)
+    bayes_net.submit_answer(selected_answer_id)
 
 picked_questions = bayes_net.pick_questions()
 print([question.name for question in picked_questions])
@@ -57,7 +59,7 @@ selected_answers_ids = [42]
 bayes_net = BayesNetDataModelWrapper.from_test_instance_id(test_instance_id)
 
 for selected_answer_id in selected_answers_ids:
-    bayes_net.post_answer(selected_answer_id)
+    bayes_net.submit_answer(selected_answer_id)
 
 results = bayes_net.get_results()
 print(results)

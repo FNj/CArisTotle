@@ -1,1 +1,2 @@
-from .CArisTotle import app
+from .config import app, db
+from .routing import *

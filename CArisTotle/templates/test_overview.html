@@ -1,0 +1,58 @@
+{% extends "common.html" %}
+
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+
+{% block main %}
+<main>
+    <section id="tests">
+        <div class="container">
+            <div class="header row">
+                <div class="twelve columns">
+                    <h2>{{ test.name }}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Popis:</h3>
+                </div>
+                <div class="eight columns">
+                    <p>{{ test.description }}</p>
+                </div>
+            </div>
+            {% if test_instances %}
+            <div class="header row">
+                <div class="twelve columns">
+                    <h3>Vámi spuštěné případy tohoto testu:</h3>
+                </div>
+            </div>
+            {% for test_instance in test_instances %}
+            <article>
+                <div class="row">
+                    <div class="six columns">
+                        <p>Test zahájen: {{ test_instance.created_at }}</p>
+                    </div>
+                    <div class="six columns">
+                        <a class="button"
+                           href="{{ url_for('questions_list', test_id=test.id, test_instance_id=test_instance.id) }}">Pokračovat
+                            v testu</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+            {% endif %}
+            <form action="{{ url_for('create_test_instance', test_id=test.id) }}" method="POST"
+                  name="test_instance_options_form">
+                {{ test_instance_options_form.hidden_tag() }}
+                <div class="row">
+                    <div class="six columns">
+                        {{ render_field_with_errors(test_instance_options_form.criterion) }}
+                    </div>
+                    <div class="six columns">
+                        {{ render_field(test_instance_options_form.submit) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}

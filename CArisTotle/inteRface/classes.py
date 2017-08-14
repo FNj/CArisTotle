@@ -38,4 +38,5 @@ class BayesNet:
         return get_marginals(self.model, node_names)
 
     def get_results(self):
-        return self.get_marginals(self.skills)
+        marginals = self.get_marginals(self.skills)
+        return list(zip(self.skills, marginals))

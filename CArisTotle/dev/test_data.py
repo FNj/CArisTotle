@@ -1,5 +1,6 @@
 import os
 
+from ..config import user_datastore
 from ..datamodel.model import *
 from ..inteRface.classes import BayesNet
 
@@ -16,12 +17,34 @@ net_reader = BayesNet(net_def, skill_names)
 # skills_number_of_states = net_reader.get_skills_numbers_of_states()
 
 entities = []
+admin_role = Role(name='admin', description="Administrátor aplikace")
+submitter_role = Role(name='submitter', description="Zadavatel testů")
+student_role = Role(name='student', description="Testovaný student")
+roles = [admin_role, submitter_role, student_role]
+entities.extend(roles)
 
-me = User(name='František Navrkal', fullname="František'); DROP TABLE users;-- Navrkal",
-          password='zizalajeborec123', email='frantisek.navrkal@pirati.cz')
+selection_criterion_1 = SelectionCriterion(id=1, name="Kritérium 1")
+selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")
+selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")
+selection_criteria = [selection_criterion_1, selection_criterion_2, selection_criterion_3]
+entities.extend(selection_criteria)
+
+state_1 = TestInstanceState(id=1, name="Započatý")
+state_2 = TestInstanceState(id=2, name="Hotový")
+state_3 = TestInstanceState(id=3, name="Vyhodnocený")
+selection_criteria = [state_1, state_2, state_3]
+entities.extend(selection_criteria)
+
+me = user_datastore.create_user(name='František Navrkal', fullname="František'); DROP TABLE users;-- Navrkal",
+                                password='zizalajeborec123', email='frantisek.navrkal@pirati.cz')
+# me = User(name='František Navrkal', fullname="František'); DROP TABLE users;-- Navrkal",
+#           password='zizalajeborec123', email='frantisek.navrkal@pirati.cz',
+#           roles=[admin_role, submitter_role, student_role])
+me.roles = roles
 entities.append(me)
 
 my_test = Test(name="Testy test", default_criterion=1, net_definition=net_def, submitter=me)
+my_test.description = """Testovní test k testování."""
 entities.append(my_test)
 
 # my_skill = Skill(name='S1', test=my_test, text='test skill')
