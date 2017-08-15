@@ -1,8 +1,8 @@
-from flask import render_template, redirect, url_for, session
+from flask import render_template, redirect, url_for
 from flask_security import current_user
 from flask_security.decorators import login_required
 
-from CArisTotle.common.classes import BayesNetDataModelWrapper
+from .common.classes import BayesNetDataModelWrapper
 from .config import app, db
 from .datamodel.model import Test, SelectionCriterion, TestInstance, Question, PossibleAnswer
 from .datamodel.procedures import list_tests, get_entity_by_type_and_id, create_and_get_test_instance, \
@@ -85,7 +85,6 @@ def question_overview(test_id, test_instance_id, question_id):
         question: Question = get_entity_by_type_and_id(Question, question_id)
         possible_answers = question.possible_answers
         answer_form = QuestionMultipleChoiceAnswerForm([(pa.id, pa.text) for pa in possible_answers])
-        session['answer_permutation'] = [1, 3, 2, 0]
         return render_template("question_overview.html", test_instance=test_instance, question=question,
                                answer_form=answer_form)
     else:
@@ -97,7 +96,6 @@ def question_overview(test_id, test_instance_id, question_id):
 @login_required
 def post_answer(test_id, test_instance_id, question_id):
     test_instance: TestInstance = get_entity_by_type_and_id(TestInstance, test_instance_id)
-    print(session['answer_permutation'])
     if test_instance.student == current_user:
         question: Question = get_entity_by_type_and_id(Question, question_id)
         possible_answers = question.possible_answers

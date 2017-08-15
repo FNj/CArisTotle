@@ -1,3 +1,6 @@
 sqlalchemy
 flask
 rpy2
+flask-security
+flask-sqlalchemy
+flask-WTF
