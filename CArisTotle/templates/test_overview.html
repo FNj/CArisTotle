@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="four columns header">
-                    <h3>Popis:</h3>
+                    <h3>Popis testu:</h3>
                 </div>
                 <div class="eight columns">
                     <p>{{ test.description }}</p>
@@ -29,25 +29,45 @@
             <article>
                 <div class="row">
                     <div class="six columns">
-                        <p>Test zahájen: {{ test_instance.created_at }}</p>
+                        <p>Případ zahájen: {{ test_instance.created_at }}</p>
                     </div>
                     <div class="six columns">
                         <a class="button"
-                           href="{{ url_for('questions_list', test_id=test.id, test_instance_id=test_instance.id) }}">Pokračovat
-                            v testu</a>
+                           href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">Otevřít přehled případu</a>
                     </div>
                 </div>
             </article>
             {% endfor %}
             {% endif %}
+            <div class="header row">
+                <div class="twelve columns">
+                    <h3>Zahájení nového případu testu:</h3>
+                </div>
+            </div>
+            <div class="header row">
+                <div class="twelve columns">
+                    <h4>Kritérium automatického výběru otázky:</h4>
+                </div>
+            </div>
             <form action="{{ url_for('create_test_instance', test_id=test.id) }}" method="POST"
                   name="test_instance_options_form">
                 {{ test_instance_options_form.hidden_tag() }}
-                <div class="row">
-                    <div class="six columns">
-                        {{ render_field_with_errors(test_instance_options_form.criterion) }}
+                {% for criterion_subfield, possible_criterion
+                   in zip(test_instance_options_form.criterion, possible_criteria) %}
+                <article>
+                    <div class="row">
+                        <div class="two columns">
+                            {{ criterion_subfield }}
+                        </div>
+                        <div class="ten columns">
+                            <h5>{{ criterion_subfield.label }}</h5>
+                            <p>{{ possible_criterion.description }}</p>
+                        </div>
                     </div>
-                    <div class="six columns">
+                </article>
+                {% endfor %}
+                <div class="row">
+                    <div class="twelve columns">
                         {{ render_field(test_instance_options_form.submit) }}
                     </div>
                 </div>

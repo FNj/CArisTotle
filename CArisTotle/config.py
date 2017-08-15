@@ -10,6 +10,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config["lang"] = 'cs'
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+app.jinja_env.globals.update(zip=zip)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.sqlite'
 app.config['SQLALCHEMY_ECHO'] = False

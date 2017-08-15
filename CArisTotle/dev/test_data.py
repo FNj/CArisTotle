@@ -25,8 +25,8 @@ entities.extend(roles)
 
 selection_criterion_1 = SelectionCriterion(id=1, name="Kritérium 1")
 selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")
-selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")
-selection_criteria = [selection_criterion_1, selection_criterion_2, selection_criterion_3]
+# selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")
+selection_criteria = [selection_criterion_1, selection_criterion_2]  # , selection_criterion_3]
 entities.extend(selection_criteria)
 
 state_1 = TestInstanceState(id=1, name="Započatý")
@@ -43,7 +43,8 @@ me = user_datastore.create_user(name='František Navrkal', fullname="František'
 me.roles = roles
 entities.append(me)
 
-my_test = Test(name="Testy test", default_criterion=1, net_definition=net_def, submitter=me)
+my_test = Test(name="Testy test", default_selection_criterion=selection_criterion_1,
+               net_definition=net_def, submitter=me)
 my_test.description = """Testovní test k testování."""
 entities.append(my_test)
 

@@ -82,7 +82,7 @@ roles_users = Table('roles_users',
 class Role(ModelBase, RoleMixin):
     __tablename__ = 'roles'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
     description = Column(Text)
 
@@ -90,7 +90,7 @@ class Role(ModelBase, RoleMixin):
 class User(ModelBase, AutoReprMixin, TimeStampMixin, UserMixin):
     __tablename__ = 'users'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     name: str = Column(String)
     fullname: str = Column(String)
     password: str = Column(String)
@@ -101,13 +101,21 @@ class User(ModelBase, AutoReprMixin, TimeStampMixin, UserMixin):
                          backref=backref('users', lazy='dynamic'))
 
 
+class SelectionCriterion(ModelBase, AutoReprMixin, TimeStampMixin):
+    __tablename__ = 'selection_criteria'
+
+    id: int = Column(Integer, primary_key=True, index=True)
+    name: str = Column(String, nullable=False, unique=True)
+    description: str = Column(Text)
+
+
 class Test(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'tests'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     name: str = Column(String, unique=True, nullable=False)
     description: str = Column(Text)
-    default_criterion: int = Column(Integer, nullable=False)
+    default_selection_criterion_id: int = Column(Integer, ForeignKey('selection_criteria.id'), nullable=False)
     net_definition: str = deferred(Column(Text, nullable=False))
     submitter_id: int = Column(Integer, ForeignKey('users.id'), nullable=False)
 
@@ -115,12 +123,13 @@ class Test(ModelBase, AutoReprMixin, TimeStampMixin):
     skills: List[Skill] = relationship("Skill", back_populates="test")
     questions: List[Question] = relationship("Question", back_populates="test")
     instances: List[TestInstance] = relationship("TestInstance", back_populates='test')
+    default_selection_criterion: SelectionCriterion = relationship("SelectionCriterion")
 
 
 class Skill(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'skills'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     name: str = Column(String, nullable=False)
     test_id: int = Column(Integer, ForeignKey('tests.id'), nullable=False)
     text: str = Column(Text)
@@ -134,7 +143,7 @@ class Skill(ModelBase, AutoReprMixin, TimeStampMixin):
 class SkillState(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'skill_states'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     skill_id: int = Column(Integer, ForeignKey('skills.id'), nullable=False)
     number: int = Column(Integer, nullable=False)
     description: str = Column(String)
@@ -148,7 +157,7 @@ class SkillState(ModelBase, AutoReprMixin, TimeStampMixin):
 class Question(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'questions'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     name: str = Column(String, nullable=False)
     test_id: int = Column(Integer, ForeignKey('tests.id'), nullable=False)
     text: str = Column(Text, nullable=False)
@@ -163,7 +172,7 @@ class Question(ModelBase, AutoReprMixin, TimeStampMixin):
 class QuestionState(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'question_states'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     question_id: int = Column(Integer, ForeignKey('questions.id'), nullable=False)
     number: int = Column(Integer, nullable=False)
     description: str = Column(String)
@@ -178,7 +187,7 @@ class QuestionState(ModelBase, AutoReprMixin, TimeStampMixin):
 class PossibleAnswer(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'possible_answers'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     state_id: int = Column(Integer, ForeignKey('question_states.id'), nullable=False)
     text: str = Column(Text, nullable=False)
 
@@ -188,18 +197,10 @@ class PossibleAnswer(ModelBase, AutoReprMixin, TimeStampMixin):
     answers: List[Answer] = relationship("Answer", back_populates='possible_answer')
 
 
-class SelectionCriterion(ModelBase, AutoReprMixin, TimeStampMixin):
-    __tablename__ = 'selection_criteria'
-
-    id: int = Column(Integer, primary_key=True)
-    name: str = Column(String, nullable=False, unique=True)
-    description: str = Column(Text)
-
-
 class TestInstanceState(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'test_instance_states'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     name: str = Column(String, nullable=False, unique=True)
     description: str = Column(Text)
 
@@ -207,7 +208,7 @@ class TestInstanceState(ModelBase, AutoReprMixin, TimeStampMixin):
 class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'test_instances'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     test_id: int = Column(Integer, ForeignKey('tests.id'), nullable=False)
     student_id: int = Column(Integer, ForeignKey('users.id'), nullable=False)
     selection_criterion_id: int = Column(Integer, ForeignKey('selection_criteria.id'), nullable=False)
@@ -224,23 +225,24 @@ class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin):
 class Answer(ModelBase, AutoReprMixin, TimeStampMixin):
     __tablename__ = 'answers'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, index=True)
     possible_answer_id: int = Column(Integer, ForeignKey('possible_answers.id'), nullable=False)
     test_instance_id: int = Column(Integer, ForeignKey('test_instances.id'), nullable=False)
+    question_id: int = Column(Integer, ForeignKey('questions.id'), nullable=False)
     is_locked_in: bool = Column(Boolean, default=False)
 
     test_instance: TestInstance = relationship("TestInstance", back_populates='answers')
     possible_answer: PossibleAnswer = relationship("PossibleAnswer", back_populates='answers')
-    question: Question = property(lambda self: self.possible_answer.question)
+    question: Question = relationship("Question")
     state: QuestionState = property(lambda self: self.possible_answer.state)
     test: Test = property(lambda self: self.test_instance.test)
 
-    __table_args__ = (UniqueConstraint('possible_answer_id', 'test_instance_id',
-                                       name='_possible_answer_test_instance_ux'),)
+    __table_args__ = (UniqueConstraint('question_id', 'test_instance_id',
+                                       name='_question_test_instance_ux'),)
 
 # class Address(ModelBase):
 #     __tablename__ = 'addresses'
-#     id: int = Column(Integer, primary_key=True)
+#     id: int = Column(Integer, primary_key=True, index=True)
 #     email_address: str = Column(String, unique=True, nullable=False)
 #     user_id: int = Column(Integer, ForeignKey('users.id'))
 #

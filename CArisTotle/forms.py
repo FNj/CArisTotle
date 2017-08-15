@@ -1,6 +1,6 @@
 from flask_security.forms import RegisterForm
 from flask_wtf import FlaskForm
-from wtforms.fields import SelectField, StringField, SubmitField, RadioField
+from wtforms.fields import StringField, SubmitField, RadioField
 from wtforms.validators import DataRequired
 
 
@@ -10,13 +10,15 @@ class ExtendedRegisterForm(RegisterForm):
 
 
 class TestInstanceOptionsForm(FlaskForm):
-    criterion = SelectField('Výběrové kritérium', [DataRequired()], coerce=int,
-                            choices=[(1, 'Kritérium 1'), (2, 'Kritérium 2'), (3, 'Kritérium 3')])
-    submit = SubmitField('Spustit test')
+    criterion = RadioField('Výběrové kritérium', [DataRequired()], coerce=int)
+    submit = SubmitField('Spustit nový případ testu')
 
-    def __init__(self, default_criterion):
-        self.criterion.data = str(default_criterion)
-        super().__init__()
+    def __init__(self, possible_criteria, default_criterion, **kwargs):
+        super().__init__(**kwargs)
+        self.criterion.choices = possible_criteria
+        if default_criterion is not None:
+            self.criterion.default = str(default_criterion)
+            self.process()
 
 
 # class QuestionMultipleChoiceAnswerForm(FlaskForm):

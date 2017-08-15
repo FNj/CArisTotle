@@ -24,7 +24,7 @@
             </div>
             <form action="{{ url_for('post_answer', test_id=test_instance.test.id, test_instance_id=test_instance.id, question_id=question.id) }}"
                   method="POST"
-                  name="test_instance_options_form"> <!-- TODO: change POST endpoint -->
+                  name="test_instance_options_form">
                 {{ answer_form.hidden_tag() }}
                 {% for answer_subfield in answer_form.answer %}
                 <article>

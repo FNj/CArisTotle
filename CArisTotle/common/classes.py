@@ -1,5 +1,5 @@
 from ..datamodel.model import TestInstance, PossibleAnswer
-from ..datamodel.procedures import get_unanswered_questions, submit_answer, get_entity_by_type_and_id
+from ..datamodel.procedures import get_unanswered_questions, submit_or_update_answer, get_entity_by_type_and_id
 from ..inteRface.classes import BayesNet
 
 
@@ -29,7 +29,7 @@ class BayesNetDataModelWrapper:
         answer = get_entity_by_type_and_id(PossibleAnswer, selected_answer_id)
         self.bayes_net.insert_evidence(questions_names=[answer.question.name],
                                        questions_states=[answer.state.number])
-        submit_answer(self.test_instance, answer)
+        submit_or_update_answer(self.test_instance, answer)
 
     def get_results(self):
         bn_results = sorted(self.bayes_net.get_results(), key=lambda tup: tup[0])

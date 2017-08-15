@@ -37,9 +37,21 @@ def create_and_get_test_instance(test: Test, student: User, selection_criterion:
     return test_instance
 
 
-def submit_answer(test_instance: TestInstance, selected_answer: PossibleAnswer):
-    answer = Answer(test_instance=test_instance, possible_answer=selected_answer)
-    session.add(answer)
+def submit_or_update_answer(test_instance: TestInstance, selected_answer: PossibleAnswer)\
+        -> bool:
+    existing_answer: Answer = session.query(Answer).filter(Answer.test_instance == test_instance,
+                                                           Answer.question == selected_answer.question).first()
+    if existing_answer is None:
+        answer = Answer(test_instance=test_instance, possible_answer=selected_answer,
+                        question=selected_answer.question)
+        session.add(answer)
+        return True
+    elif not existing_answer.is_locked_in:
+        existing_answer.possible_answer = selected_answer
+        return True
+    else:
+        raise Exception('Cannot update a locked in answer.')
+        # return False
 
 
 def get_unanswered_questions(test_instance: TestInstance) -> List[Question]:
@@ -56,3 +68,7 @@ def get_unanswered_questions(test_instance: TestInstance) -> List[Question]:
 
 def list_test_instances_by_test_and_student(test: Test, student: User) -> List[TestInstance]:
     return session.query(TestInstance).filter(TestInstance.test == test, TestInstance.student == student).all()
+
+
+def list_selection_criteria() -> List[SelectionCriterion]:
+    return session.query(SelectionCriterion).all()
