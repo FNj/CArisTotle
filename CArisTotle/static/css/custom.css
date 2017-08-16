@@ -107,6 +107,7 @@ section {
 
 .header {
     margin-bottom: 3rem;
+    text-align: left;
 }
 
 /* Header
@@ -162,17 +163,17 @@ body > nav a {
 
 /* News
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-section#tests article {
+section article {
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
     border-bottom: solid 0.2rem #11270b;
 }
 
-section#tests article h3 {
+section article h3 {
     font-size: 3rem;
 }
 
-section#tests article .header {
+section article .header {
     text-align: left;
 }
 

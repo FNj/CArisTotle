@@ -1,6 +1,6 @@
 from flask_security.forms import RegisterForm
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, SubmitField, RadioField
+from wtforms.fields import StringField, SubmitField, RadioField, BooleanField
 from wtforms.validators import DataRequired
 
 
@@ -31,6 +31,7 @@ class TestInstanceOptionsForm(FlaskForm):
 
 class QuestionMultipleChoiceAnswerForm(FlaskForm):
     answer = RadioField('Odpověď', [DataRequired()], coerce=int)
+    lock_in = BooleanField('Uzamknout otázku')
     submit = SubmitField('Odeslat odpověď')
 
     def __init__(self, possible_answers, **kwargs):

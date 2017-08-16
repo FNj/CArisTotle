@@ -62,10 +62,41 @@
         <div class="row">
             <div class="twelve columns">
                 <a class="button button-primary" href="{{ url_for('tests_list') }}">Testy</a>
+                {% if test is defined %}
+                <a class="button button-primary" href="{{ url_for('test_overview', test_id=test.id) }}">Přehled aktuálního testu</a>
+                {% if test_instance is defined %}
+                <a class="button button-primary" href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">Přehled aktuálního případu testu</a>
+                <a class="button button-primary" href="{{ url_for('questions_list', test_id=test.id, test_instance_id=test_instance.id) }}">Seznam otázek aktuálního případu testu</a>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
 </nav>
+{% endblock %}
+{% block flashes %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<section id="flashes">
+    <div class="container">
+        <div class="header row">
+            <div class="twelve columns">
+                <h2>Chyby a varování:</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns">
+                <ul class="flashes">
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endwith %}
 {% endblock %}
 {% block main %}
 <main>

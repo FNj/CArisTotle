@@ -2,18 +2,25 @@
 
 {% block main %}
 <main>
-    <section id="tests">
+    <section id="questions">
         <div class="container">
             <div class="header row">
                 <div class="twelve columns">
                     <h2>Otázky k testu {{ test_instance.test.name }}:</h2>
                 </div>
             </div>
-            {% for question in test_instance.test.questions %}
+            <section id="unanswered_questions">
+            {% if unanswered_questions %}
+            <div class="row">
+                <div class="twelve columns">
+                    <h3>Nezodpovězené:</h3>
+                </div>
+            </div>
+            {% for question in unanswered_questions %}
             <article>
                 <div class="row">
                     <div class="four columns header">
-                        <h3>{{ question.name }}</h3>
+                        <h4>{{ question.name }}</h4>
                     </div>
                     <div class="eight columns">
                         <p>{{ question.text }}</p>
@@ -23,13 +30,46 @@
                     </div>
                 </div>
             </article>
+            {% endfor %}
             {% else %}
             <div class="row">
-                <div class="twelve columns header">
-                    <p>Žádné otázky k dispozici.</p>
+                <div class="twelve columns">
+                    <p>Žádné nezodpovězené otázky.</p>
                 </div>
             </div>
+            {% endif %}
+            </section>
+            <section id="answered_questions">
+            {% if answers %}
+            <div class="row">
+                <div class="twelve columns">
+                    <h3>Zodpovězené:</h3>
+                </div>
+            </div>
+            {% for answer in answers %}
+            <article>
+                <div class="row">
+                    <div class="four columns header">
+                        <h4>{{ answer.question.name }}</h4>
+                    </div>
+                    <div class="eight columns">
+                        <p>{{ answer.question.text }}</p>
+                        <p>Vaše odpověď: {{ answer.possible_answer.text }}</p>
+                        <a class="button"
+                           href="{{ url_for('question_overview', test_id=test_instance.test.id, test_instance_id=test_instance.id, question_id=answer.question.id) }}">Otevřít
+                            přehled otázky</a>
+                    </div>
+                </div>
+            </article>
             {% endfor %}
+            {% else %}
+            <div class="row">
+                <div class="twelve columns">
+                    <p>Žádné zodpovězené otázky.</p>
+                </div>
+            </div>
+            {% endif %}
+            </section>
         </div>
     </section>
 </main>
