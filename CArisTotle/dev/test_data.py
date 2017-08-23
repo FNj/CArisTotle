@@ -4,6 +4,8 @@ from ..config import user_datastore
 from ..datamodel.model import *
 from ..inteRface.classes import BayesNet
 
+#  TODO: Move all this elsewhere
+
 net_file_path = os.path.join(os.path.dirname(__file__), 'net_set1.net')
 
 with open(net_file_path, "r") as net_file:
@@ -29,11 +31,11 @@ selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")
 selection_criteria = [selection_criterion_1, selection_criterion_2]  # , selection_criterion_3]
 entities.extend(selection_criteria)
 
-state_1 = TestInstanceState(id=1, name="Započatý")
-state_2 = TestInstanceState(id=2, name="Hotový")
-state_3 = TestInstanceState(id=3, name="Vyhodnocený")
-selection_criteria = [state_1, state_2, state_3]
-entities.extend(selection_criteria)
+# state_1 = TestInstanceState(id=1, name="Započatý")
+# state_2 = TestInstanceState(id=2, name="Ukončený")
+# state_3 = TestInstanceState(id=3, name="Vyhodnocený")
+# selection_criteria = [state_1, state_2, state_3]
+# entities.extend(selection_criteria)
 
 me = user_datastore.create_user(name='František Navrkal', fullname="František'); DROP TABLE users;-- Navrkal",
                                 password='zizalajeborec123', email='frantisek.navrkal@pirati.cz')
@@ -46,6 +48,9 @@ entities.append(me)
 my_test = Test(name="Testy test", default_selection_criterion=selection_criterion_1,
                net_definition=net_def, submitter=me)
 my_test.description = """Testovní test k testování."""
+my_test.stop_max_entropy = 1  # v bitech
+my_test.stop_min_answers = 4
+my_test.stop_max_time = timedelta(minutes=90)
 entities.append(my_test)
 
 # my_skill = Skill(name='S1', test=my_test, text='test skill')

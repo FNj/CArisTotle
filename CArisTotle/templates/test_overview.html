@@ -4,7 +4,7 @@
 
 {% block main %}
 <main>
-    <section id="tests">
+    <section id="test_overview">
         <div class="container">
             <div class="header row">
                 <div class="twelve columns">
@@ -29,11 +29,13 @@
             <article>
                 <div class="row">
                     <div class="six columns">
+                        <p>Název případu: {{ test_instance.name }}</p>
                         <p>Případ zahájen: {{ test_instance.created_at }}</p>
                     </div>
                     <div class="six columns">
                         <a class="button"
-                           href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">Otevřít přehled případu</a>
+                           href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">
+                            Otevřít přehled případu</a>
                     </div>
                 </div>
             </article>
@@ -68,6 +70,7 @@
                 {% endfor %}
                 <div class="row">
                     <div class="twelve columns">
+                        {{ render_field_with_errors(test_instance_options_form.name) }}
                         {{ render_field(test_instance_options_form.submit) }}
                     </div>
                 </div>

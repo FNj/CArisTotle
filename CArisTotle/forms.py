@@ -10,6 +10,7 @@ class ExtendedRegisterForm(RegisterForm):
 
 
 class TestInstanceOptionsForm(FlaskForm):
+    name = StringField('Název případu', [DataRequired()])
     criterion = RadioField('Výběrové kritérium', [DataRequired()], coerce=int)
     submit = SubmitField('Spustit nový případ testu')
 
@@ -31,7 +32,7 @@ class TestInstanceOptionsForm(FlaskForm):
 
 class QuestionMultipleChoiceAnswerForm(FlaskForm):
     answer = RadioField('Odpověď', [DataRequired()], coerce=int)
-    lock_in = BooleanField('Uzamknout otázku')
+    lock_in = BooleanField('Uzamknout a vyhodnotit otázku')
     submit = SubmitField('Odeslat odpověď')
 
     def __init__(self, possible_answers, **kwargs):

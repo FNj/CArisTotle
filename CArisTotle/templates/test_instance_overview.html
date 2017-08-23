@@ -4,74 +4,90 @@
 
 {% block main %}
 <main>
-    <div class="container">
-        <div class="header row">
-            <div class="twelve columns">
-                <h2>{{ test_instance.test.name }}</h2>
+    <section id="test_instance_overview">
+        <div class="container">
+            <div class="header row">
+                <div class="twelve columns">
+                    <h2>{{ test_instance.test.name }}</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="four columns header">
-                <h3>Popis:</h3>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Popis:</h3>
+                </div>
+                <div class="eight columns">
+                    <p>{{ test_instance.test.description }}</p>
+                </div>
             </div>
-            <div class="eight columns">
-                <p>{{ test_instance.test.description }}</p>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Případ spuštěn:</h3>
+                </div>
+                <div class="eight columns">
+                    <p>{{ test_instance.test.created_at }}</p>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="four columns header">
-                <h3>Případ spuštěn:</h3>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Stav případu:</h3>
+                </div>
+                <div class="eight columns">
+                    <p>{% if test_instance.closed_at %}Případ uzavřen {{ test_instance.closed_at }}.{% else %}
+                        Případ otevřen.{% endif %}</p>
+                </div>
             </div>
-            <div class="eight columns">
-                <p>{{ test_instance.test.created_at }}</p>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Přehled stavu otázek:</h3>
+                </div>
+                <div class="eight columns">
+                    <p>Otázek celkem: {{ len(test.questions) }}</p>
+                    <p>Nezodpověznených: {{ len(test.questions) - len(test_instance.answers) }}</p>
+                    <p>Zodpovězených: {{ len(test_instance.answers) }},
+                        z toho {{ len(locked_in_answers) }} uzamčených a vyhodnocených </p>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="four columns header">
-                <h3>Stav případu:</h3>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Výběrové kritérium:</h3>
+                </div>
+                <div class="eight columns">
+                    <h4>{{ test_instance.selection_criterion.name }}</h4>
+                    <p>{{ test_instance.selection_criterion.description }}</p>
+                </div>
             </div>
-            <div class="eight columns">
-                <p>{{ test_instance.state.name }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="four columns header">
-                <h3>Výběrové kritérium:</h3>
-            </div>
-            <div class="eight columns">
-                <h4>{{ test_instance.selection_criterion.name }}</h4>
-                <p>{{ test_instance.selection_criterion.description }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="four columns header">
-                <h3>Výsledek testu:</h3>
-            </div>
-            <div class="eight columns">
-                <dl>
-                    {% for skill, skill_states_marginals_tuples in test_results %}
-                    <dt>{{ skill.text }}</dt>
-                    <dd>
-                        <ol>
-                        {% for skill_state, marginal_value in skill_states_marginals_tuples %}
-                            <li>{{ skill_state.description }}: {{ "{0:.00f} %".format(marginal_value * 100) }}</li>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Výsledek testu:</h3>
+                </div>
+                <div class="eight columns">
+                    <dl>
+                        {% for skill, skill_states_marginals_tuples in test_results %}
+                        <dt>{{ skill.text }}</dt>
+                        <dd>
+                            <ol>
+                            {% for skill_state, marginal_value in skill_states_marginals_tuples %}
+                                <li>{{ skill_state.description }}: {{ "{0:.002f} %".format(marginal_value * 100) }}</li>
+                            {% endfor %}
+                            </ol>
+                        </dd>
                         {% endfor %}
-                        </ol>
-                    </dd>
-                    {% endfor %}
-                </dl>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <a class="button"
+                       href="{{ url_for('pick_question', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">
+                        Vybrat otázku dle výběrového kritéria</a>
+                </div>
+                <div class="six columns">
+                    <a class="button"
+                       href="{{ url_for('questions_list', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">
+                        Seznam otázek testu</a>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="six columns">
-                <a class="button"
-                   href="{{ url_for('pick_question', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">Vybrat otázku dle výběrového kritéria</a>
-            </div>
-            <div class="six columns">
-                <a class="button"
-                   href="{{ url_for('questions_list', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">Seznam otázek testu</a>
-            </div>
-        </div>
-    </div>
+    </section>
 </main>
 {% endblock %}

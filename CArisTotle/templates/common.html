@@ -63,16 +63,43 @@
             <div class="twelve columns">
                 <a class="button button-primary" href="{{ url_for('tests_list') }}">Testy</a>
                 {% if test is defined %}
-                <a class="button button-primary" href="{{ url_for('test_overview', test_id=test.id) }}">Přehled aktuálního testu</a>
+                <a class="button button-primary" href="{{ url_for('test_overview', test_id=test.id) }}">
+                    Přehled aktuálního testu</a>
                 {% if test_instance is defined %}
-                <a class="button button-primary" href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">Přehled aktuálního případu testu</a>
-                <a class="button button-primary" href="{{ url_for('questions_list', test_id=test.id, test_instance_id=test_instance.id) }}">Seznam otázek aktuálního případu testu</a>
+                <a class="button button-primary"
+                   href="{{ url_for('test_instance_overview', test_id=test.id, test_instance_id=test_instance.id) }}">
+                    Přehled aktuálního případu testu</a>
+                <a class="button button-primary"
+                   href="{{ url_for('questions_list', test_id=test.id, test_instance_id=test_instance.id) }}">
+                    Seznam otázek aktuálního případu testu</a>
                 {% endif %}
                 {% endif %}
             </div>
         </div>
     </div>
 </nav>
+{% endblock %}
+{% block status %}
+{% if stopping_criteria_states is defined and test_instance is defined %}
+<section id="top_status">
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                {% if stopping_criteria_states.time_remaining %}
+                <p>Zbývající čas: {{ stopping_criteria_states.get_pretty_time_remaining() }}</p>
+                {% endif %}
+                {% if stopping_criteria_states.entropy_remaining %}
+                <p>Zbývající entropie výsledků:
+                    {{ "{0:.002f}".format(stopping_criteria_states.entropy_remaining) }} bitů</p>
+                {% endif %}
+                {% if stopping_criteria_states.questions_remaining %}
+                <p>Zbývající počet otázek: {{ stopping_criteria_states.questions_remaining }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endblock %}
 {% block flashes %}
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -81,7 +108,7 @@
     <div class="container">
         <div class="header row">
             <div class="twelve columns">
-                <h2>Chyby a varování:</h2>
+                <h3>Zprávy, chyby a varování:</h3>
             </div>
         </div>
         <div class="row">

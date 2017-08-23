@@ -1,7 +1,7 @@
 # from sqlalchemy import Column, Integer, String, ForeignKey, Text, MetaData
 # from sqlalchemy.ext.declarative import declarative_base
 # from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List
 
 from flask_security import UserMixin, RoleMixin
@@ -14,11 +14,14 @@ ModelBase = db.Model
 
 Column = db.Column
 Integer = db.Integer
+# Numeric = db.Numeric
+Float = db.Float
 Boolean = db.Boolean
 String = db.String
 ForeignKey = db.ForeignKey
 Text = db.Text
 DateTime = db.DateTime
+Interval = db.Interval
 MetaData = db.MetaData
 
 relationship = db.relationship
@@ -33,8 +36,16 @@ def _get_date():
 
 
 class TimeStampMixin:
-    created_at = Column(DateTime, default=_get_date)
-    updated_at = Column(DateTime, onupdate=_get_date)
+    created_at: datetime = Column(DateTime, default=_get_date)
+    updated_at: datetime = Column(DateTime, onupdate=_get_date)
+
+
+class ClosedAtMixin:
+    closed_at: datetime = Column(DateTime)
+
+    def close(self):
+        if not self.closed_at:
+            self.closed_at = _get_date()
 
 
 class ForwardDeclarationBase:
@@ -118,6 +129,9 @@ class Test(ModelBase, AutoReprMixin, TimeStampMixin):
     default_selection_criterion_id: int = Column(Integer, ForeignKey('selection_criteria.id'), nullable=False)
     net_definition: str = deferred(Column(Text, nullable=False))
     submitter_id: int = Column(Integer, ForeignKey('users.id'), nullable=False)
+    stop_max_time: timedelta = Column(Interval)
+    stop_min_answers: int = Column(Integer)
+    stop_max_entropy: float = Column(Float)
 
     submitter: User = relationship("User")
     skills: List[Skill] = relationship("Skill", back_populates="test")
@@ -197,39 +211,39 @@ class PossibleAnswer(ModelBase, AutoReprMixin, TimeStampMixin):
     answers: List[Answer] = relationship("Answer", back_populates='possible_answer')
 
 
-class TestInstanceState(ModelBase, AutoReprMixin, TimeStampMixin):
-    __tablename__ = 'test_instance_states'
+# class TestInstanceState(ModelBase, AutoReprMixin, TimeStampMixin):  # TODO: Consider removal
+#     __tablename__ = 'test_instance_states'
+#
+#     id: int = Column(Integer, primary_key=True, index=True)
+#     name: str = Column(String, nullable=False, unique=True)
+#     description: str = Column(Text)
 
-    id: int = Column(Integer, primary_key=True, index=True)
-    name: str = Column(String, nullable=False, unique=True)
-    description: str = Column(Text)
 
-
-class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin):
+class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
     __tablename__ = 'test_instances'
 
     id: int = Column(Integer, primary_key=True, index=True)
+    name: str = Column(String)
     test_id: int = Column(Integer, ForeignKey('tests.id'), nullable=False)
     student_id: int = Column(Integer, ForeignKey('users.id'), nullable=False)
     selection_criterion_id: int = Column(Integer, ForeignKey('selection_criteria.id'), nullable=False)
-    state_id: int = Column(Integer, ForeignKey('test_instance_states.id'), nullable=False, default=1)
-    is_closed: bool = Column(Boolean, default=False)
+    # state_id: int = Column(Integer, ForeignKey('test_instance_states.id'), nullable=False, default=1)
 
     test: Test = relationship("Test")
     student: User = relationship("User")
     answers: List[Answer] = relationship("Answer", back_populates='test_instance')
     selection_criterion: SelectionCriterion = relationship("SelectionCriterion")
-    state: TestInstanceState = relationship("TestInstanceState")
+    # state: TestInstanceState = relationship("TestInstanceState")
 
 
-class Answer(ModelBase, AutoReprMixin, TimeStampMixin):
+class Answer(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
     __tablename__ = 'answers'
 
     id: int = Column(Integer, primary_key=True, index=True)
     possible_answer_id: int = Column(Integer, ForeignKey('possible_answers.id'), nullable=False)
     test_instance_id: int = Column(Integer, ForeignKey('test_instances.id'), nullable=False)
     question_id: int = Column(Integer, ForeignKey('questions.id'), nullable=False)
-    is_locked_in: bool = Column(Boolean, default=False)
+    # is_locked_in: bool = Column(Boolean, default=False)  # TODO: change to closed_at
 
     test_instance: TestInstance = relationship("TestInstance", back_populates='answers')
     possible_answer: PossibleAnswer = relationship("PossibleAnswer", back_populates='answers')

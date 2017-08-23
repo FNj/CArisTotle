@@ -4,7 +4,7 @@
 
 {% block main %}
 <main>
-    <section id="tests">
+    <section id="question">
         <div class="container">
             <div class="header row">
                 <div class="twelve columns">
@@ -25,8 +25,22 @@
                     <p>{{ existing_answer.possible_answer.text }}</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="four columns header">
+                    <h3>Stav:</h3>
+                </div>
+                <div class="eight columns">
+                    {% if existing_answer.is_locked_in %}
+                    <p>Otázka je uzamčena a odpověď vyhodnocena na stav:<br>
+                    {{ existing_answer.state.description }}</p>
+                    {% else %}
+                    <p>Otázka je zodpovězena, ale nebyla zatím uzamčena a vyhodnocena.</p>
+                    {% endif %}
+                </div>
+            </div>
             {% endif %}
-            {% if answer_form %}
+            {% if answer_form and (existing_answer is none or not existing_answer.is_locked_in) and
+                  test_instance.closed_at is none %}
             <div class="header row">
                 <div class="twelve columns">
                     <h3>Možné odpovědi:</h3>
@@ -60,7 +74,7 @@
             {% else %}
             <div class="row">
                 <div class="twelve columns">
-                    <p>Žádné možné odpovědi.</p>
+                    <p>Otázka uzavřena.</p>
                 </div>
             </div>
             {% endif %}

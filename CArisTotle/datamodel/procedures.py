@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 from .model import User, Test, Question, PossibleAnswer, TestInstance, Answer, SelectionCriterion, \
@@ -5,6 +6,7 @@ from .model import User, Test, Question, PossibleAnswer, TestInstance, Answer, S
 from ..config import db
 
 session = db.session
+func = db.func
 
 
 def init_db():
@@ -30,28 +32,34 @@ def get_skill_state_by_skill_and_number(skill: Skill, number: int) -> SkillState
     return session.query(SkillState).filter(SkillState.skill == skill, SkillState.number == number).first()
 
 
-def create_and_get_test_instance(test: Test, student: User, selection_criterion: SelectionCriterion) \
-        -> TestInstance:
-    test_instance = TestInstance(test=test, student=student, selection_criterion=selection_criterion)
+def create_and_get_test_instance(test: Test, student: User, name: str,
+                                 selection_criterion: SelectionCriterion) -> TestInstance:
+    test_instance = TestInstance(test=test, student=student, name=name,
+                                 selection_criterion=selection_criterion)
     session.add(test_instance)
     return test_instance
 
 
-def submit_or_update_answer(test_instance: TestInstance, selected_answer: PossibleAnswer, lock_in: bool=False)\
-        -> bool:
-    existing_answer: Answer = session.query(Answer).filter(Answer.test_instance == test_instance,
-                                                           Answer.question == selected_answer.question).first()
-    if existing_answer is None:
-        answer = Answer(test_instance=test_instance, possible_answer=selected_answer,
-                        question=selected_answer.question, is_locked_in=lock_in)
-        session.add(answer)
-        return True
-    elif not existing_answer.is_locked_in:
-        existing_answer.possible_answer = selected_answer
-        return True
+def submit_or_update_answer(test_instance: TestInstance, selected_answer: PossibleAnswer,
+                            lock_in: bool = False,
+                            force_close: bool = False, force_lock: bool = False) -> bool:
+    if force_close or test_instance.closed_at is None:
+        existing_answer: Answer = session.query(Answer).filter(
+            Answer.test_instance == test_instance, Answer.question == selected_answer.question).first()
+        if existing_answer is None:
+            answer = Answer(test_instance=test_instance, possible_answer=selected_answer,
+                            question=selected_answer.question)
+            if lock_in:
+                answer.close()
+            session.add(answer)
+            return True
+        elif force_lock or not existing_answer.closed_at:
+            existing_answer.possible_answer = selected_answer
+            return True
+        else:
+            raise Exception('Cannot update a locked in answer (unless forced).')
     else:
-        raise Exception('Cannot update a locked in answer.')
-        # return False
+        raise Exception('Cannot add answer to a closed test (unless forced).')
 
 
 def list_unanswered_questions(test_instance: TestInstance) -> List[Question]:
@@ -71,7 +79,8 @@ def list_answers_by_test_instance(test_instance: TestInstance) -> List[Answer]:
 
 
 def list_test_instances_by_test_and_student(test: Test, student: User) -> List[TestInstance]:
-    return session.query(TestInstance).filter(TestInstance.test == test, TestInstance.student == student).all()
+    return session.query(TestInstance).filter(TestInstance.test == test,
+                                              TestInstance.student == student).all()
 
 
 def list_selection_criteria() -> List[SelectionCriterion]:
@@ -81,3 +90,20 @@ def list_selection_criteria() -> List[SelectionCriterion]:
 def get_answer_by_question_and_test_instance(question: Question, test_instance: TestInstance) -> Answer:
     return session.query(Answer).filter(Answer.question == question,
                                         Answer.test_instance == test_instance).first()
+
+
+def get_latest_answers_update_timestamp_by_test_instance(test_instance: TestInstance) -> datetime:
+    max_candidates = [dt for dt in
+                      session.query(func.max(Answer.created_at), func.max(Answer.updated_at)
+                                    ).filter(Answer.test_instance == test_instance).first()
+                      if dt is not None]
+    if max_candidates:
+        return max(max_candidates)
+    else:
+        return test_instance.created_at
+
+
+def close_test_instance(test_instance: TestInstance):
+    test_instance.close()
+    for answer in test_instance.answers:
+        answer.close()

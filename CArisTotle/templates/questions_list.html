@@ -2,7 +2,7 @@
 
 {% block main %}
 <main>
-    <section id="questions">
+    <section id="questions_list">
         <div class="container">
             <div class="header row">
                 <div class="twelve columns">
@@ -55,6 +55,10 @@
                     <div class="eight columns">
                         <p>{{ answer.question.text }}</p>
                         <p>Vaše odpověď: {{ answer.possible_answer.text }}</p>
+                        {% if answer.is_locked_in %}
+                        <p>Otázka je uzamčena a odpověď vyhodnocena na stav:<br>
+                        {{ answer.state.description }}</p>
+                        {% endif %}
                         <a class="button"
                            href="{{ url_for('question_overview', test_id=test_instance.test.id, test_instance_id=test_instance.id, question_id=answer.question.id) }}">Otevřít
                             přehled otázky</a>
