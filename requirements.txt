@@ -4,3 +4,4 @@ rpy2
 flask-security
 flask-sqlalchemy
 flask-WTF
+bcrypt

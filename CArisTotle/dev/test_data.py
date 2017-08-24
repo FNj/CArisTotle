@@ -25,8 +25,8 @@ student_role = Role(name='student', description="Testovaný student")
 roles = [admin_role, submitter_role, student_role]
 entities.extend(roles)
 
-selection_criterion_1 = SelectionCriterion(id=1, name="Kritérium 1")
-selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")
+selection_criterion_1 = SelectionCriterion(id=1, name="Kritérium 1")  # TODO: learn what those mean
+selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")  # TODO: learn what those mean
 # selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")
 selection_criteria = [selection_criterion_1, selection_criterion_2]  # , selection_criterion_3]
 entities.extend(selection_criteria)
