@@ -60,7 +60,7 @@ def create_test_instance(test_id):
                                                      test_instance_options_form.name.data,
                                                      selection_criterion=selection_criterion)
         db.session.commit()
-        return redirect(url_for("questions_list", test_id=test.id, test_instance_id=test_instance.id))
+        return redirect(url_for("test_instance_overview", test_id=test.id, test_instance_id=test_instance.id))
     else:
         flash("Formulář byl špatně vyplněn.", "error")
         return redirect(url_for("test_overview", test_id=test.id))
