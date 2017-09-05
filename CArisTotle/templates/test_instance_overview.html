@@ -43,8 +43,8 @@
                 <div class="eight columns">
                     <p>Otázek celkem: {{ len(test.questions) }}</p>
                     <p>Nezodpověznených: {{ len(test.questions) - len(test_instance.answers) }}</p>
-                    <p>Zodpovězených: {{ len(test_instance.answers) }},
-                        z toho {{ len(locked_in_answers) }} uzamčených a vyhodnocených </p>
+                    <p>Zodpovězených: {{ len(test_instance.answers) }}<!--,
+                        z toho {{ len(locked_in_answers) }} uzamčených a vyhodnocených </p>-->
                 </div>
             </div>
             <div class="row">

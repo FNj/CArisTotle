@@ -143,11 +143,11 @@ def post_answer(test_id, test_instance_id, question_id):
         possible_answer: PossibleAnswer = get_entity_by_type_and_id(PossibleAnswer,
                                                                     answer_form.answer.data)
         if time_remaining(test_instance).total_seconds() >= -app.config['CARISTOTLE_TIME_LIMIT_GRACE_SECONDS']:
-            submit_or_update_answer(test_instance, possible_answer, answer_form.lock_in.data)
-            if answer_form.lock_in.data:
-                flash("Odpověď na otázku {} vyhodnocena na stav: {}".format(question.name,
+            submit_or_update_answer(test_instance, possible_answer)
+            # if answer_form.lock_in.data:
+            flash("Odpověď na otázku {} vyhodnocena na stav: {}".format(question.name,
                                                                         possible_answer.state.description),
-                      "message")
+                  "message")
         else:
             flash("Otázka zodpovězena po vypršení času. Nebyla zaznamenána.", "warning")
         db.session.commit()

@@ -34,9 +34,9 @@ selection.criterion <- 1 # přepínač pro volbu otázek, v tuto chvili muze byt
 # asi bych radeji oznacoval stavy 1-n, v nasem pripade 1 a 2
 
 #answered.questions <- list("Q56" = 1, "Q1" = 2)
-answered.questions <- c("Q56", "Q1")
-answered.states <- c(1, 2)
-model <- insert.evidence(model=model, evidence=answered.questions, state = answered.states)
+# answered.questions <- c("Q56", "Q1")
+# answered.states <- c(1, 2)
+# model <- insert.evidence(model=model, evidence=answered.questions, state = answered.states)
 
 #answered.questions <- list(list(name = "Q56", state = 2))
 # vložit všechny známé odpovědi
@@ -73,9 +73,11 @@ model <- insert.evidence(model=model, evidence=answered.questions, state = answe
 # nemenne a menit jen question.list (neco jako question.list = setdiff(questions, answered.questions))
 questions <- qe
 question.list <- list("Q2", "Q3", c("Q4","Q5"))
+question.list <- qe
 pick <- pick.question(model, questions, selection.criterion = 1, question.list)
 
 q_to_ask <- question.list[[pick$question]]
+q_to_ask
 # navratova hodnota je trosku komplexnejsi opet kvuli moznosti polozeni svazanych otazek. viz napoveda return:
 # A list containing the selected question from \code{question.list}. This list contains
 #  \code{$question} which is the index of the selected question in the \code{question.list} or the position

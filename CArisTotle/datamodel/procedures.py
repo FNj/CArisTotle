@@ -41,7 +41,7 @@ def create_and_get_test_instance(test: Test, student: User, name: str,
 
 
 def submit_or_update_answer(test_instance: TestInstance, selected_answer: PossibleAnswer,
-                            lock_in: bool = False,
+                            lock_in: bool = True,
                             force_close: bool = False, force_lock: bool = False) -> bool:
     if force_close or test_instance.closed_at is None:
         existing_answer: Answer = session.query(Answer).filter(

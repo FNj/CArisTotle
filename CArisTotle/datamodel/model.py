@@ -87,10 +87,12 @@ class_list = [Role, User, Test, Skill, SkillState, Question, QuestionState, Poss
 
 roles_users = Table('roles_users',
                     Column('user_id', Integer, ForeignKey('users.id')),
-                    Column('role_id', Integer, ForeignKey('roles.id')))
+                    Column('role_id', Integer, ForeignKey('roles.id')),
+                    Column('created_at', DateTime, default=_get_date),
+                    Column('updated_at', DateTime, onupdate=_get_date))
 
 
-class Role(ModelBase, RoleMixin):
+class Role(ModelBase, TimeStampMixin, RoleMixin):
     __tablename__ = 'roles'
 
     id = Column(Integer, primary_key=True, index=True)

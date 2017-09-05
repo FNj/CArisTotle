@@ -25,9 +25,10 @@ student_role = Role(name='student', description="Testovaný student")
 roles = [admin_role, submitter_role, student_role]
 entities.extend(roles)
 
-selection_criterion_1 = SelectionCriterion(id=1, name="Kritérium 1")  # TODO: learn what those mean
-selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")  # TODO: learn what those mean
-# selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")
+selection_criterion_1 = SelectionCriterion(id=1, name="Maximalizace očekávaného zisku informace")  # Expected information gain max TODO: show
+selection_criterion_2 = SelectionCriterion(id=2, name="Kritérium 2")  # Maximizing skill probabilities variance
+#  (for binary skill vars only)
+# selection_criterion_3 = SelectionCriterion(id=3, name="Kritérium 3")  # Maximize question probabilities variance
 selection_criteria = [selection_criterion_1, selection_criterion_2]  # , selection_criterion_3]
 entities.extend(selection_criteria)
 
@@ -49,7 +50,7 @@ my_test = Test(name="Testy test", default_selection_criterion=selection_criterio
                net_definition=net_def, submitter=me)
 my_test.description = """Testovní test k testování."""
 my_test.stop_max_entropy = 1  # v bitech
-my_test.stop_min_answers = 4
+my_test.stop_min_answers = 10
 my_test.stop_max_time = timedelta(minutes=90)
 entities.append(my_test)
 
