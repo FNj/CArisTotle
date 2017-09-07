@@ -1,3 +1,5 @@
+chooseCRANmirror(graphics=FALSE)
+
 install.packages("irlba")
 install.packages("magrittr")
 install.packages("pkgconfig")
