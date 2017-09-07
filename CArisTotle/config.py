@@ -1,10 +1,12 @@
 from flask import Flask
+from flask_babel import Babel
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_sqlalchemy import SQLAlchemy
 
 from .forms import ExtendedRegisterForm
 
 app = Flask('CArisTotle')
+babel = Babel(app)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config["lang"] = 'cs'
@@ -25,6 +27,8 @@ app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 app.config['SECURITY_SEND_PASSWORD_CHANGE_EMAIL'] = False
 app.config['SECURITY_SEND_PASSWORD_RESET_EMAIL'] = False
 app.config['SECURITY_SEND_PASSWORD_RESET_NOTICE_EMAIL'] = False
+
+app.config['BABEL_DEFAULT_LOCALE'] = 'cs'
 
 app.config['CARISTOTLE_TIME_LIMIT_GRACE_SECONDS'] = 30
 

@@ -1,0 +1,120 @@
+# Czech translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-09-07 01:31+0200\n"
+"PO-Revision-Date: 2017-09-07 01:16+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: cs\n"
+"Language-Team: cs <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: forms.py:9
+msgid "Name"
+msgstr "Jméno"
+
+#: forms.py:10
+msgid "Full name"
+msgstr "Celé jméno"
+
+#: templates/security/_menu.html:4
+msgid "Logged in as:"
+msgstr "Příhlášen jako:"
+
+#: templates/security/_menu.html:6
+msgid "Not logged in."
+msgstr "Nepřihlášen"
+
+#: templates/security/_menu.html:15
+msgid "Logout"
+msgstr "Odhlásit se"
+
+#: templates/security/_menu.html:19 templates/security/login_user.html:11
+#: templates/security/send_login.html:5
+msgid "Login"
+msgstr "Přihlásit se"
+
+#: templates/security/_menu.html:23 templates/security/register_user.html:11
+msgid "Register"
+msgstr "Registrovat se"
+
+#: templates/security/_menu.html:27
+msgid "Forgot password"
+msgstr "Zapomněl jsem heslo"
+
+#: templates/security/_menu.html:30
+msgid "Confirm account"
+msgstr "Potvrdit účet"
+
+#: templates/security/change_password.html:3
+msgid "Change password"
+msgstr "Změnit heslo"
+
+#: templates/security/forgot_password.html:3
+msgid "Send password reset instructions"
+msgstr "Poslat instrukce pro reset hesla"
+
+#: templates/security/reset_password.html:3
+msgid "Reset password"
+msgstr "Resetovat heslo"
+
+#: templates/security/send_confirmation.html:3
+msgid "Resend confirmation instructions"
+msgstr "Znovu poslat instrukce pro povrzení"
+
+#: templates/security/email/change_notice.html:1
+msgid "Your password has been changed."
+msgstr "Vaše heslo bylo změněno."
+
+#: templates/security/email/change_notice.html:3
+msgid "If you did not change your password,"
+msgstr "Pokud jste si nezměnil(a) heslo,"
+
+#: templates/security/email/change_notice.html:4
+msgid "click here to reset it"
+msgstr "klikněte zde pro resetování"
+
+#: templates/security/email/confirmation_instructions.html:1
+msgid "Please confirm your email through the link below:"
+msgstr "Prosíme, potvrĎte váš mail pomocí odkazu níže:"
+
+#: templates/security/email/confirmation_instructions.html:3
+#: templates/security/email/welcome.html:6
+msgid "Confirm my account"
+msgstr "Potvrdit můj účet"
+
+#: templates/security/email/login_instructions.html:1
+#: templates/security/email/welcome.html:1
+#, python-format
+msgid "Welcome %(email)s!"
+msgstr "Vítejte %(email)s!"
+
+#: templates/security/email/login_instructions.html:3
+msgid "You can log into your account through the link below:"
+msgstr "Můžete se přihlásit odkazem níže:"
+
+#: templates/security/email/login_instructions.html:5
+msgid "Login now"
+msgstr "Přihlásit teď:"
+
+#: templates/security/email/reset_instructions.html:1
+msgid "Click here to reset your password"
+msgstr "Klikněte zde pro reset hesla."
+
+#: templates/security/email/reset_notice.html:1
+msgid "Your password has been reset"
+msgstr "Vaše heslo bylo resetováno."
+
+#: templates/security/email/welcome.html:4
+msgid "You can confirm your email through the link below:"
+msgstr "Můžete potvrdit svůj email pomocí odkazu níže:"
+

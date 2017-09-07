@@ -1,3 +1,4 @@
+from flask_babel import lazy_gettext as _
 from flask_security.forms import RegisterForm
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, SubmitField, RadioField
@@ -5,8 +6,8 @@ from wtforms.validators import DataRequired
 
 
 class ExtendedRegisterForm(RegisterForm):
-    name = StringField('Name', [DataRequired()])
-    fullname = StringField('Full name', [DataRequired()])
+    name = StringField(_('Name'), [DataRequired()])
+    fullname = StringField(_('Full name'), [DataRequired()])
 
 
 class TestInstanceOptionsForm(FlaskForm):

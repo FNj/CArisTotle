@@ -8,12 +8,13 @@ from .common.procedures import check_test_existence_and_redirect_if_not_exists, 
     check_user_test_instance_correspondence_and_redirect_on_error, \
     time_remaining, get_stopping_criteria_states, close_test_instance_if_criteria_met
 from .config import app, db
-from .datamodel.model import Test, SelectionCriterion, TestInstance, Question, PossibleAnswer
+from .datamodel.model import Test, SelectionCriterion, TestInstance, Question, PossibleAnswer, User
 from .datamodel.procedures import list_tests, get_entity_by_type_and_id, create_and_get_test_instance, \
     list_test_instances_by_test_and_student, submit_or_update_answer, list_selection_criteria, \
     list_answers_by_test_instance, list_unanswered_questions, get_answer_by_question_and_test_instance
 from .forms import TestInstanceOptionsForm, QuestionMultipleChoiceAnswerForm
 
+current_user: User = current_user
 
 @app.route('/')
 def index():
@@ -31,10 +32,11 @@ def tests_list():
 def test_overview(test_id):
     test: Test = get_entity_by_type_and_id(Test, test_id)
     check_test_existence_and_redirect_if_not_exists(test)
-    if current_user.is_authenticated:
-        test_instances = list_test_instances_by_test_and_student(test, current_user)
-    else:
-        test_instances = []
+    # if current_user.is_authenticated:
+    #     test_instances = list_test_instances_by_test_and_student(test, current_user)
+    # else:
+    #     test_instances = []
+    test_instances = list_test_instances_by_test_and_student(test, current_user)
     possible_criteria = list_selection_criteria()
     test_instance_options_form = TestInstanceOptionsForm(possible_criteria=[(sc.id, sc.name) for sc
                                                                             in possible_criteria],

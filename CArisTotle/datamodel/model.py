@@ -1,13 +1,9 @@
-# from sqlalchemy import Column, Integer, String, ForeignKey, Text, MetaData
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import relationship
 from datetime import datetime, timedelta
 from typing import List
 
 from flask_security import UserMixin, RoleMixin
 from sqlalchemy import UniqueConstraint
 
-from ..common.mixins import AutoReprMixin
 from ..config import db
 
 ModelBase = db.Model
@@ -100,7 +96,7 @@ class Role(ModelBase, TimeStampMixin, RoleMixin):
     description = Column(Text)
 
 
-class User(ModelBase, AutoReprMixin, TimeStampMixin, UserMixin):
+class User(ModelBase, TimeStampMixin, UserMixin):
     __tablename__ = 'users'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -114,7 +110,7 @@ class User(ModelBase, AutoReprMixin, TimeStampMixin, UserMixin):
                          backref=backref('users', lazy='dynamic'))
 
 
-class SelectionCriterion(ModelBase, AutoReprMixin, TimeStampMixin):
+class SelectionCriterion(ModelBase, TimeStampMixin):
     __tablename__ = 'selection_criteria'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -122,7 +118,7 @@ class SelectionCriterion(ModelBase, AutoReprMixin, TimeStampMixin):
     description: str = Column(Text)
 
 
-class Test(ModelBase, AutoReprMixin, TimeStampMixin):
+class Test(ModelBase, TimeStampMixin):
     __tablename__ = 'tests'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -142,7 +138,7 @@ class Test(ModelBase, AutoReprMixin, TimeStampMixin):
     default_selection_criterion: SelectionCriterion = relationship("SelectionCriterion")
 
 
-class Skill(ModelBase, AutoReprMixin, TimeStampMixin):
+class Skill(ModelBase, TimeStampMixin):
     __tablename__ = 'skills'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -156,7 +152,7 @@ class Skill(ModelBase, AutoReprMixin, TimeStampMixin):
     __table_args__ = (UniqueConstraint('name', 'test_id', name='_test_skill_name_ux'),)
 
 
-class SkillState(ModelBase, AutoReprMixin, TimeStampMixin):
+class SkillState(ModelBase, TimeStampMixin):
     __tablename__ = 'skill_states'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -170,7 +166,7 @@ class SkillState(ModelBase, AutoReprMixin, TimeStampMixin):
     __table_args__ = (UniqueConstraint('number', 'skill_id', name='_skill_state_number_ux'),)
 
 
-class Question(ModelBase, AutoReprMixin, TimeStampMixin):
+class Question(ModelBase, TimeStampMixin):
     __tablename__ = 'questions'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -185,7 +181,7 @@ class Question(ModelBase, AutoReprMixin, TimeStampMixin):
     __table_args__ = (UniqueConstraint('name', 'test_id', name='_test_question_name_ux'),)
 
 
-class QuestionState(ModelBase, AutoReprMixin, TimeStampMixin):
+class QuestionState(ModelBase, TimeStampMixin):
     __tablename__ = 'question_states'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -200,7 +196,7 @@ class QuestionState(ModelBase, AutoReprMixin, TimeStampMixin):
     __table_args__ = (UniqueConstraint('number', 'question_id', name='_question_state_number_ux'),)
 
 
-class PossibleAnswer(ModelBase, AutoReprMixin, TimeStampMixin):
+class PossibleAnswer(ModelBase, TimeStampMixin):
     __tablename__ = 'possible_answers'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -213,15 +209,7 @@ class PossibleAnswer(ModelBase, AutoReprMixin, TimeStampMixin):
     answers: List[Answer] = relationship("Answer", back_populates='possible_answer')
 
 
-# class TestInstanceState(ModelBase, AutoReprMixin, TimeStampMixin):  # TODO: Consider removal
-#     __tablename__ = 'test_instance_states'
-#
-#     id: int = Column(Integer, primary_key=True, index=True)
-#     name: str = Column(String, nullable=False, unique=True)
-#     description: str = Column(Text)
-
-
-class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
+class TestInstance(ModelBase, TimeStampMixin, ClosedAtMixin):
     __tablename__ = 'test_instances'
 
     id: int = Column(Integer, primary_key=True, index=True)
@@ -229,23 +217,20 @@ class TestInstance(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
     test_id: int = Column(Integer, ForeignKey('tests.id'), nullable=False)
     student_id: int = Column(Integer, ForeignKey('users.id'), nullable=False)
     selection_criterion_id: int = Column(Integer, ForeignKey('selection_criteria.id'), nullable=False)
-    # state_id: int = Column(Integer, ForeignKey('test_instance_states.id'), nullable=False, default=1)
 
     test: Test = relationship("Test")
     student: User = relationship("User")
     answers: List[Answer] = relationship("Answer", back_populates='test_instance')
     selection_criterion: SelectionCriterion = relationship("SelectionCriterion")
-    # state: TestInstanceState = relationship("TestInstanceState")
 
 
-class Answer(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
+class Answer(ModelBase, TimeStampMixin, ClosedAtMixin):
     __tablename__ = 'answers'
 
     id: int = Column(Integer, primary_key=True, index=True)
     possible_answer_id: int = Column(Integer, ForeignKey('possible_answers.id'), nullable=False)
     test_instance_id: int = Column(Integer, ForeignKey('test_instances.id'), nullable=False)
     question_id: int = Column(Integer, ForeignKey('questions.id'), nullable=False)
-    # is_locked_in: bool = Column(Boolean, default=False)  # TODO: change to closed_at
 
     test_instance: TestInstance = relationship("TestInstance", back_populates='answers')
     possible_answer: PossibleAnswer = relationship("PossibleAnswer", back_populates='answers')
@@ -255,15 +240,3 @@ class Answer(ModelBase, AutoReprMixin, TimeStampMixin, ClosedAtMixin):
 
     __table_args__ = (UniqueConstraint('question_id', 'test_instance_id',
                                        name='_question_test_instance_ux'),)
-
-# class Address(ModelBase):
-#     __tablename__ = 'addresses'
-#     id: int = Column(Integer, primary_key=True, index=True)
-#     email_address: str = Column(String, unique=True, nullable=False)
-#     user_id: int = Column(Integer, ForeignKey('users.id'))
-#
-#     user: User = relationship("User", backref="addresses")
-#
-#     def __repr__(self):
-#         return "<Address(email_address='%s')>" % self.email_address
-#

@@ -1,6 +1,6 @@
 from typing import List
 
-from .procedural import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question, \
+from .procedures import init_net, get_questions, get_skills, get_numbers_of_states, insert_evidence, pick_question, \
     get_marginals
 
 

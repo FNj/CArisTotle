@@ -17,7 +17,6 @@ ro.r('''get.numbers.of.states <- function(model, node_vector) {
                 nl <- model@nodes[node_vector]
                 vv <- 1:length(nl@nodes)
                 for(node in 1:length(nl@nodes)){
-                    # nl@nodes[[node]]@name //TO CONSIDER: Maybe make dict instead.
                     vv[node] <- nl@nodes[[node]]@number.of.states
                 }
                 vv

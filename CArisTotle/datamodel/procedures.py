@@ -1,8 +1,8 @@
 from datetime import datetime
-from typing import List
+from typing import List, TypeVar, Generic
 
 from .model import User, Test, Question, PossibleAnswer, TestInstance, Answer, SelectionCriterion, \
-    Skill, SkillState
+    Skill, SkillState, Role
 from ..config import db
 
 session = db.session
@@ -10,20 +10,38 @@ func = db.func
 
 
 def init_db():
-    # ModelBase.metadata.create_all(engine)
+    entities = []
+    admin_role = Role(name='admin', description="Administrátor aplikace")
+    submitter_role = Role(name='submitter', description="Zadavatel testů")
+    student_role = Role(name='student', description="Testovaný student")
+    roles = [admin_role, submitter_role, student_role]
+    entities.extend(roles)
+    selection_criterion_1 = SelectionCriterion(id=1, name="Maximalizace středního zisku informace",
+                                               description="Maximalizuje se střední hodnota poklesu součtu"
+                                                           " Shannonovy entropie napříč dovednostními"
+                                                           " proměnnými.")
+    selection_criterion_2 = SelectionCriterion(id=2, name="Maximalizace rozptylu na dovednostech",
+                                               description="Maximalizace středního rozptylu rozdílu"
+                                                           " pravěpdobností stavů dovednostních proměnných"
+                                                           " před a po zodpovězení dané otázky.")
+    selection_criteria = [selection_criterion_1, selection_criterion_2]
+    entities.extend(selection_criteria)
     db.create_all()
+    session.add_all(entities)
+    session.commit()
 
 
 def drop_all():
-    # ModelBase.metadata.drop_all(engine)
     db.drop_all()
 
 
 def list_tests() -> List[Test]:
     return session.query(Test).all()
 
+T = TypeVar('T')
 
-def get_entity_by_type_and_id(entity_type: type, entity_id: int):
+
+def get_entity_by_type_and_id(entity_type: Generic[T], entity_id: int) -> T:
     entity = session.query(entity_type).filter_by(id=entity_id).first()
     return entity
 

@@ -3,22 +3,17 @@ start_time = time.time()
 from CArisTotle.datamodel.model import *
 from CArisTotle.datamodel.procedures import session, init_db, drop_all, \
     get_entity_by_type_and_id, create_and_get_test_instance
-from CArisTotle.dev.test_data import entities
 from CArisTotle.common.classes import BayesNetDataModelWrapper
 from CArisTotle.common.procedures import entropy_remaining, time_remaining,\
     questions_remaining, get_stopping_criteria_states
-
-
-# TODO: Make parts of this into an init script
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
 # --- insert test_data
 drop_all()
 init_db()
-
-session.add_all(entities)
-session.commit()
+from CArisTotle.dev.test_data import test_data
+test_data()
 
 q45: Question = session.query(Question).filter_by(name='Q45').first()
 q45.text = 'Q45 MODIFIED placeholder text'
