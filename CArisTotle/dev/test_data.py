@@ -5,8 +5,6 @@ from ..datamodel.model import *
 from ..datamodel.procedures import get_entity_by_type_and_id, session
 from ..inteRface.classes import BayesNet
 
-#  TODO: Move all this elsewhere
-
 net_file_path = os.path.join(os.path.dirname(__file__), 'net_set1.net')
 
 with open(net_file_path, "r") as net_file:
@@ -28,7 +26,7 @@ entities.append(me)
 my_test = Test(name="Testy test", default_selection_criterion=selection_criterion_1,
                net_definition=net_def, submitter=me)
 my_test.description = """Testovní test k testování."""
-my_test.stop_max_entropy = 1  # v bitech
+my_test.stop_max_entropy = .5  # v bitech
 my_test.stop_min_answers = 10
 my_test.stop_max_time = timedelta(minutes=90)
 entities.append(my_test)

@@ -141,7 +141,7 @@ def post_answer(test_id, test_instance_id, question_id):
     question: Question = get_entity_by_type_and_id(Question, question_id)
     possible_answers = question.possible_answers
     answer_form = QuestionMultipleChoiceAnswerForm([(pa.id, pa.text) for pa in possible_answers])
-    if answer_form.validate_on_submit():  # TODO: tidy this
+    if answer_form.validate_on_submit():
         possible_answer: PossibleAnswer = get_entity_by_type_and_id(PossibleAnswer,
                                                                     answer_form.answer.data)
         if time_remaining(test_instance).total_seconds() >= -app.config['CARISTOTLE_TIME_LIMIT_GRACE_SECONDS']:

@@ -99,7 +99,7 @@ session.commit()
 # questions_number_of_states = net_reader.get_questions_numbers_of_states()
 # skills_number_of_states = net_reader.get_skills_numbers_of_states()
 # # net_reader.insert_evidence(questions[0:2], [0, 1])
-# pick = net_reader.pick_question(net_reader.get_questions())  # TODO: test results
+# pick = net_reader.pick_question(net_reader.get_questions())
 # print(pick)
 
 # print(net_file_path)
