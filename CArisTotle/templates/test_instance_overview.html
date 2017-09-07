@@ -67,7 +67,7 @@
                         <dd>
                             <ol>
                             {% for skill_state, marginal_value in skill_states_marginals_tuples %}
-                                <li>{{ skill_state.description }}: {{ "{0:.002f} %".format(marginal_value * 100) }}</li>
+                                <li>{{ skill_state.description }}: {{ "{0:.002f}&nbsp;%".format(marginal_value * 100)|safe }}</li>
                             {% endfor %}
                             </ol>
                         </dd>
@@ -76,12 +76,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="six columns">
+                <div class="twelve columns">
                     <a class="button"
                        href="{{ url_for('pick_question', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">
                         Vybrat otázku dle výběrového kritéria</a>
-                </div>
-                <div class="six columns">
                     <a class="button"
                        href="{{ url_for('questions_list', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">
                         Seznam otázek testu</a>
