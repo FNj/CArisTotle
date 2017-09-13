@@ -10,6 +10,7 @@ func = db.func
 
 
 def init_db():
+    db.create_all()
     entities = []
     admin_role = Role(name='admin', description="Administrátor aplikace")
     submitter_role = Role(name='submitter', description="Zadavatel testů")
@@ -26,13 +27,13 @@ def init_db():
                                                            " před a po zodpovězení dané otázky.")
     selection_criteria = [selection_criterion_1, selection_criterion_2]
     entities.extend(selection_criteria)
-    db.create_all()
     session.add_all(entities)
     session.commit()
 
 
 def drop_all():
     db.drop_all()
+    db.session.commit()
 
 
 def list_tests() -> List[Test]:

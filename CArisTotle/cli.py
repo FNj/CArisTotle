@@ -1,6 +1,6 @@
 from .config import app
 from .datamodel.procedures import init_db, drop_all
-
+from .dev.test_data import test_data
 
 @app.cli.command('initdb')
 def initdb():
@@ -20,6 +20,5 @@ def dropall():
 
 @app.cli.command('testdata')
 def testdata():
-    from .dev.test_data import test_data
     test_data()
     print("Test data inserted into the database.")
