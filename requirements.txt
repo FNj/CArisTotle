@@ -6,3 +6,4 @@ flask-sqlalchemy
 flask-WTF
 flask-babel
 bcrypt
+bokeh
