@@ -76,6 +76,17 @@
                 </div>
             </div>
             <div class="row">
+                <div class="four columns header">
+                    <h3>Grafy:</h3> {# TODO: fix this crap after bokeh testing #}
+                </div>
+                <div class="eight columns">
+                    <!-- bokeh start -->
+                    {{ bokeh_script|safe }}
+                    {{ bokeh_div|safe }}
+                    <!-- bokeh end -->
+                </div>
+            </div>
+            <div class="row">
                 <div class="twelve columns">
                     <a class="button"
                        href="{{ url_for('pick_question', test_id=test_instance.test.id, test_instance_id=test_instance.id) }}">

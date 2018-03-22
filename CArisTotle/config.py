@@ -2,6 +2,7 @@ from flask import Flask
 from flask_babel import Babel
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_sqlalchemy import SQLAlchemy
+from bokeh import __version__ as bokeh_version
 
 from .forms import ExtendedRegisterForm
 
@@ -12,7 +13,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config["lang"] = 'cs'
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
-app.jinja_env.globals.update(zip=zip, len=len)
+app.jinja_env.globals.update(zip=zip, len=len, bokeh_version=bokeh_version)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.sqlite'
 app.config['SQLALCHEMY_ECHO'] = False
