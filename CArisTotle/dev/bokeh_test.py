@@ -1,5 +1,6 @@
 from bokeh.plotting import figure, output_file
 from bokeh.embed import components
+from ..analytics.common import BokehFragments
 
 # prepare some data
 x = [1, 2, 3, 4, 5]
@@ -14,4 +15,4 @@ p = figure(title="simple line example", x_axis_label='x', y_axis_label='y')
 # add a line renderer with legend and line thickness
 p.line(x, y, legend="Temp.", line_width=2)
 
-bokeh_script, bokeh_div = components(p)
+bokeh_fragments = BokehFragments(*components(p))

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List, TypeVar, Generic
 
 from .model import User, Test, Question, PossibleAnswer, TestInstance, Answer, SelectionCriterion, \
-    Skill, SkillState, Role
+    Skill, SkillState, Role, QuestionState
 from ..config import db
 
 session = db.session
@@ -39,16 +39,17 @@ def drop_all():
 def list_tests() -> List[Test]:
     return session.query(Test).all()
 
+
 T = TypeVar('T')
 
 
 def get_entity_by_type_and_id(entity_type: Generic[T], entity_id: int) -> T:
-    entity = session.query(entity_type).filter_by(id=entity_id).first()
+    entity = session.query(entity_type).filter_by(id=entity_id).one()
     return entity
 
 
 def get_skill_state_by_skill_and_number(skill: Skill, number: int) -> SkillState:
-    return session.query(SkillState).filter(SkillState.skill == skill, SkillState.number == number).first()
+    return session.query(SkillState).filter(SkillState.skill == skill, SkillState.number == number).one()
 
 
 def create_and_get_test_instance(test: Test, student: User, name: str,
@@ -64,7 +65,7 @@ def submit_or_update_answer(test_instance: TestInstance, selected_answer: Possib
                             force_close: bool = False, force_lock: bool = False) -> bool:
     if force_close or test_instance.closed_at is None:
         existing_answer: Answer = session.query(Answer).filter(
-            Answer.test_instance == test_instance, Answer.question == selected_answer.question).first()
+            Answer.test_instance == test_instance, Answer.question == selected_answer.question).one_or_none()
         if existing_answer is None:
             answer = Answer(test_instance=test_instance, possible_answer=selected_answer,
                             question=selected_answer.question)
@@ -108,13 +109,13 @@ def list_selection_criteria() -> List[SelectionCriterion]:
 
 def get_answer_by_question_and_test_instance(question: Question, test_instance: TestInstance) -> Answer:
     return session.query(Answer).filter(Answer.question == question,
-                                        Answer.test_instance == test_instance).first()
+                                        Answer.test_instance == test_instance).one_or_none()
 
 
 def get_latest_answers_update_timestamp_by_test_instance(test_instance: TestInstance) -> datetime:
     max_candidates = [dt for dt in
                       session.query(func.max(Answer.created_at), func.max(Answer.updated_at)
-                                    ).filter(Answer.test_instance == test_instance).first()
+                                    ).filter(Answer.test_instance == test_instance).one_or_none()
                       if dt is not None]
     if max_candidates:
         return max(max_candidates)
@@ -126,3 +127,15 @@ def close_test_instance(test_instance: TestInstance):
     test_instance.close()
     for answer in test_instance.answers:
         answer.close()
+
+
+def list_questions_with_answers(test_instance: TestInstance):
+    test = test_instance.test
+    ret = session.query(*(Question.__table__.columns + Answer.__table__.columns)). \
+        select_from(Question). \
+        join(Answer). \
+        join(PossibleAnswer). \
+        join(QuestionState). \
+        filter(Question.test == test).all()
+    # TODO: finish this
+    return None

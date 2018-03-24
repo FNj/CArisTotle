@@ -14,9 +14,10 @@ from .datamodel.procedures import list_tests, get_entity_by_type_and_id, create_
     list_answers_by_test_instance, list_unanswered_questions, get_answer_by_question_and_test_instance
 from .forms import TestInstanceOptionsForm, QuestionMultipleChoiceAnswerForm
 
-from .dev.bokeh_test import bokeh_script, bokeh_div  # TODO: Remove this after testing
+from .dev.bokeh_test import bokeh_fragments  # TODO: Remove this after testing
 
 current_user: User = current_user
+
 
 @app.route('/')
 def index():
@@ -87,7 +88,7 @@ def test_instance_overview(test_id, test_instance_id):
                            test_instance=test_instance, test_results=test_results,
                            locked_in_answers=[a for a in test_instance.answers if a.closed_at is not None],
                            stopping_criteria_states=stopping_criteria_states,
-                           bokeh_script=bokeh_script, bokeh_div=bokeh_div)  # TODO: Change this after bokeh testing
+                           bokeh=True, bokeh_fragments=bokeh_fragments)  # TODO: Change this after bokeh testing
 
 
 @app.route('/test/<int:test_id>/instance/<int:test_instance_id>/question')
