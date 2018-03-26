@@ -44,7 +44,8 @@ def test_data():
         for state_number in range(skill_number_of_states):
             skill_state = SkillState(skill=skills[i], number=state_number,
                                      description=skills[i].name + ' state number ' +
-                                                 str(state_number) + ' placeholder description')
+                                                 str(state_number) + ' placeholder description',
+                                     score=state_number)
             skill_states.append(skill_state)
     entities.extend(skill_states)
 
@@ -60,7 +61,8 @@ def test_data():
         for state_number in range(question_number_of_states):
             question_state = QuestionState(question=questions[i], number=state_number,
                                            description=questions[i].name + ' state number ' +
-                                                       str(state_number) + ' placeholder description')
+                                                       str(state_number) + ' placeholder description',
+                                           score=state_number)
             questions_states.append(question_state)
             possible_answer = PossibleAnswer(state=question_state, text=questions[i].name + ' state number ' +
                                                                         str(state_number) + ' possible answer')

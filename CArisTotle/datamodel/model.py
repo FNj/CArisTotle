@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import List
+from decimal import Decimal
 
 from flask_security import UserMixin, RoleMixin
 from sqlalchemy import UniqueConstraint
@@ -10,7 +11,7 @@ ModelBase = db.Model
 
 Column = db.Column
 Integer = db.Integer
-# Numeric = db.Numeric
+Numeric = db.Numeric
 Float = db.Float
 Boolean = db.Boolean
 String = db.String
@@ -159,6 +160,7 @@ class SkillState(ModelBase, TimeStampMixin):
     skill_id: int = Column(Integer, ForeignKey('skills.id'), nullable=False)
     number: int = Column(Integer, nullable=False)
     description: str = Column(String)
+    score: Decimal = Column(Numeric)
 
     skill: Skill = relationship("Skill", back_populates='states')
     test: Test = property(lambda self: self.skill.test)
@@ -188,6 +190,7 @@ class QuestionState(ModelBase, TimeStampMixin):
     question_id: int = Column(Integer, ForeignKey('questions.id'), nullable=False)
     number: int = Column(Integer, nullable=False)
     description: str = Column(String)
+    score: Decimal = Column(Numeric)
 
     question: Question = relationship("Question", back_populates='states')
     test: Test = property(lambda self: self.question.test)

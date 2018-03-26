@@ -6,6 +6,7 @@ from CArisTotle.datamodel.procedures import session, init_db, drop_all, \
 from CArisTotle.common.classes import BayesNetDataModelWrapper
 from CArisTotle.common.procedures import entropy_remaining, time_remaining,\
     questions_remaining, get_stopping_criteria_states
+from CArisTotle.analytics.test_instance import get_question_and_answers_df
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
@@ -64,15 +65,18 @@ for selected_answer_id in selected_answers_ids:
 
 results = bayes_net.get_results()
 print(results)
-print(bayes_net.get_total_skills_entropy())
-print(entropy_remaining(test_instance, bayes_net))
-print(time_remaining(test_instance))
-print(questions_remaining(test_instance))
-stopping_criteria_states = get_stopping_criteria_states(test_instance, bayes_net)
-print(stopping_criteria_states)
-print(stopping_criteria_states.get_pretty_time_remaining())
+# print(bayes_net.get_total_skills_entropy())
+# print(entropy_remaining(test_instance, bayes_net))
+# print(time_remaining(test_instance))
+# print(questions_remaining(test_instance))
+# stopping_criteria_states = get_stopping_criteria_states(test_instance, bayes_net)
+# print(stopping_criteria_states)
+# print(stopping_criteria_states.get_pretty_time_remaining())
 # print(stopping_criteria_met(test_instance, stopping_criteria_states))
 # test_instance.close()
+q_a_df = get_question_and_answers_df(test_instance)
+print(q_a_df)
+print("Score sum: ", q_a_df['state_score'].sum())
 session.commit()
 
 

@@ -7,3 +7,4 @@ flask-WTF
 flask-babel
 bcrypt
 bokeh
+pandas

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, TypeVar, Generic
+from typing import List, TypeVar, Generic, Tuple
 
 from .model import User, Test, Question, PossibleAnswer, TestInstance, Answer, SelectionCriterion, \
     Skill, SkillState, Role, QuestionState
@@ -129,13 +129,13 @@ def close_test_instance(test_instance: TestInstance):
         answer.close()
 
 
-def list_questions_with_answers(test_instance: TestInstance):
-    test = test_instance.test
-    ret = session.query(*(Question.__table__.columns + Answer.__table__.columns)). \
-        select_from(Question). \
-        join(Answer). \
-        join(PossibleAnswer). \
-        join(QuestionState). \
-        filter(Question.test == test).all()
-    # TODO: finish this
-    return None
+# def list_questions_and_answers(test_instance: TestInstance) -> List[Tuple[Question, PossibleAnswer, QuestionState]]:
+#     test = test_instance.test
+#     ret = session.query(Question, PossibleAnswer, QuestionState). \
+#         select_from(Question). \
+#         outerjoin(Answer, Question.id == Answer.question_id). \
+#         outerjoin(PossibleAnswer, Answer.possible_answer_id == PossibleAnswer.id). \
+#         outerjoin(QuestionState, PossibleAnswer.state_id == QuestionState.id). \
+#         filter(Question.test == test).all()
+#     # TODO: get rid of this, it is wrong
+#     return ret
